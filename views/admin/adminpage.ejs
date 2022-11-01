@@ -1,0 +1,53 @@
+
+<body>
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic btn ">Total Order</div>
+           
+          </div>
+         
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic btn ">Total Sales</div>
+            
+          </div>
+         
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic btn ">Total Profit</div>
+           
+          </div>
+          
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic btn ">Total Return</div>
+           
+          </div>
+          
+        </div>
+      </div>
+
+     
+    </div>
+  </section> 
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+
