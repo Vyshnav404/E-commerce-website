@@ -4,6 +4,7 @@ const expresslayout = require('express-ejs-layouts')
 const adminRouter = require('./routes/admin')
 const userRouter = require('./routes/user')
 const app = express()
+const db = require('./config/connection')
 const port = 8000;
 
 app.use(expresslayout)
@@ -17,6 +18,10 @@ app.set("views", "./views");
 app.set("layout","./layout/layout")
 
 
+db.connect((err)=>{
+    if(err) console.log("connection error"+err);
+    else console.log("Database connected successfully");
+})
 
 
 
