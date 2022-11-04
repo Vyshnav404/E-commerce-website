@@ -10,7 +10,7 @@
   position: fixed;
   height: 100%;
   width: 240px;
-  background: #0A2558;
+  background: #e58f1e;
   transition: all 0.5s ease;
 }
 .sidebar.active{
@@ -50,11 +50,11 @@
   text-decoration: none;
   transition: all 0.4s ease;
 }
-.sidebar .nav-links li a.active{
-  background: #081D45;
-}
+/* .sidebar .nav-links li a.active{
+  background: #4b2e02;
+} */
 .sidebar .nav-links li a:hover{
-  background: #081D45;
+  background: #4b2e02;
 }
 .sidebar .nav-links li i{
   min-width: 60px;
@@ -135,7 +135,7 @@ nav .search-box .bx-search{
   position: absolute;
   height: 40px;
   width: 40px;
-  background: #2697FF;
+  background: #e58f1e;
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
@@ -164,7 +164,7 @@ nav .profile-details img{
 }
 nav .profile-details .admin_name{
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 800;
   color: #333;
   margin: 0 10px;
   white-space: nowrap;
