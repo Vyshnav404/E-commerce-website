@@ -7,6 +7,7 @@ const adminlogin=(req,res)=>{
 const adminLoginHome =(req,res)=>{
      adminget.adminDologin(req.body).then((response)=>{
         if(response.status){
+            req.session.admin=true
             res.render("admin/adminpage",{admin:true,user:false})
         }else{
             res.redirect('/admin')
@@ -15,10 +16,21 @@ const adminLoginHome =(req,res)=>{
   
 }
 
+const adminLogout =(req,res)=>{
+    req.session.destroy(function(err){
+        if(err){
+            console.log('error');
+        }else{
+            res.redirect('/admin')
+        }
+    })
+}
+
 
 
 module.exports={
     adminlogin,
-    adminLoginHome
+    adminLoginHome,
+    adminLogout
 
 }

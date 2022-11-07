@@ -1,0 +1,65 @@
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!-- Button trigger modal -->
+<div class="container">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add Category
+    </button>
+    </div>
+    <!-- Modal -->
+    <br>
+    <form action="/admin/addcategory" method="post">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">ADD CATEGORY</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label for="addcategory">ADD CATEGORY</label>
+            <input type="text" name="categoryName" id="newCategory">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+       <!-- javascript of modal -->
+    <script>
+     const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+    
+    myModal.addEventListener('shown.bs.modal', () => {
+    myInput.focus()
+    })
+    </script>
+    <div class="container">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+              <th scope="col">NO</th>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+           <% for (var i=0; i<category.length;i++) { %>
+            <tr>
+                <th scope="row">1</th>
+                <td><%= category[i].categoryName %></td>
+                <td>Otto</td>
+            
+              </tr>
+            <% } %>
+          </tbody>
+      </table>
+    </div>
