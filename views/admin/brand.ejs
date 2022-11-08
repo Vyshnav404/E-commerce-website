@@ -1,0 +1,87 @@
+
+<!-- Button trigger modal -->
+<div class="container product">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add Brand
+    </button>
+    </div>
+  
+  <!-- Modal -->
+  <form action="/admin/addbrand" method="post">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="addbrand">ADD BRAND</label>
+            <input type="text" name="brandName" id="newCategory">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<!-- javascript of modal  -->
+
+
+<script>
+    const myModal = document.getElementById('myModal')
+   const myInput = document.getElementById('myInput')
+   
+   myModal.addEventListener('shown.bs.modal', () => {
+   myInput.focus()
+   })
+   </script>
+
+
+  <!-- table -->
+  <div class="container">
+    <div class="bname">
+<table class="table table-success table-striped">
+    <thead>
+    
+        <tr>
+          <th scope="col">NO.</th>
+          <th scope="col">Brand Name</th>
+          <th scope="col">Edit Brand</th>
+          <th scope="col">Delete Brand</th>
+        </tr>
+       
+      </thead>
+      <tbody>
+        <% for(let i=0;i<brandDetails.length;i++) { %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%=brandDetails[i].brandName %></td>
+          <td><a href="" class="btn btn-warning">EDIT</a></td>
+          <td><a onclick="Deletebrand('<%=brandDetails[i]._id%>')" class="btn btn-danger">DELETE</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+  </table>
+</div>
+</div>
+
+<script>
+    function Deletebrand(brandId){
+        fetch('/admin/deleteBrand',{
+            method:'delete',
+            headers:{
+               'Content-Type':'application/JSON' 
+            },
+            body:JSON.stringify({
+                brandId
+            })
+        }).then(()=>{
+            window.location='/admin/brand'
+        })
+    }
+</script>

@@ -42,24 +42,43 @@
     myInput.focus()
     })
     </script>
+
+    <!-- table -->
     <div class="container">
     <table class="table table-success table-striped">
         <thead>
             <tr>
               <th scope="col">NO</th>
               <th scope="col">Name</th>
-              <th scope="col">Action</th>
+              <th scope="col">Edit Category</th>
+              <th scope="col">Delete Category</th>
             </tr>
           </thead>
           <tbody>
            <% for (var i=0; i<category.length;i++) { %>
             <tr>
-                <th scope="row">1</th>
+                <th scope="row"><%= i+1 %></th>
                 <td><%= category[i].categoryName %></td>
-                <td>Otto</td>
-            
+                <td><a href="" class="btn btn-warning">EDIT</a></td>
+                <td><a onclick="Deletecategory('<%=category[i]._id%>')" class="btn btn-danger">DELETE</a></td>
               </tr>
             <% } %>
           </tbody>
       </table>
     </div>
+
+    <script>
+      function Deletecategory(categoryId){
+        fetch("/admin/deleteCategory",{
+          method:'delete',
+          headers :{
+            'Content-Type':'application/JSON'
+          },
+          body:JSON.stringify({
+            categoryId
+          })
+        }).then(()=>{
+          window.location='/admin/category'
+        })
+      }
+    </script>

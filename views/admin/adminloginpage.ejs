@@ -10,14 +10,16 @@
                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                 <p class="text-white-50 mb-5">Please enter your login and password!</p>
                   
-                <form action="/admin/login" method="post">
+                <form action="/admin/login" method="post" onsubmit="return valiadation()">
                 <div class="form-outline form-white mb-4">
                   <input type="text" id="typeEmailX" name="username" class="form-control form-control-lg" />
+                  <span id="usernameError"></span>
                   <label class="form-label" for="typeEmailX">Username</label>
                 </div>
   
                 <div class="form-outline form-white mb-4">
                   <input type="password" id="typePasswordX" name="Password" class="form-control form-control-lg" />
+                  <span id="passwordError"></span>
                   <label class="form-label" for="typePasswordX">Password</label>
                 </div>
   
@@ -46,3 +48,34 @@
       </div>
     </div>
   </section>
+
+  <script>
+    function valiadation(){
+       let flag = 0;
+       let username = document.getElementById('typeEmailX').value.trim()
+       let password = document.getElementById('typePasswordX').value.trim()
+
+       if(username ==''){
+        document.getElementById('usernameError').innerHTML="Username Required"
+        flag=1
+       }else if(username.length<3){
+        document.getElementById("usernameError").innerHTML="Enter atleast 3 character"
+        flag=1
+       }else{
+        document.getElementById("usernameError").innerHTML=""
+       }
+
+       if(password ==''){
+        document.getElementById('passwordError').innerHTML="Password Required"
+        flag = 1
+       }else{
+        document.getElementById('passwordError').innerHTML=""
+       }
+
+
+       if(flag==1){
+        return false
+       }
+       
+    }
+  </script>

@@ -1,14 +1,16 @@
 const adminget = require('../../model/adminlogin_helper')
 
+
 const adminlogin=(req,res)=>{
     res.render("admin/adminloginpage",{admin:false,user:false})
 }
+
 
 const adminLoginHome =(req,res)=>{
      adminget.adminDologin(req.body).then((response)=>{
         if(response.status){
             req.session.admin=true
-            res.render("admin/adminpage",{admin:true,user:false})
+            res.render("admin/adminpage",{admin:true,user:false ,title:""})
         }else{
             res.redirect('/admin')
         }

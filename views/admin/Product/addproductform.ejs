@@ -1,0 +1,69 @@
+
+<section>
+    <div class="container">
+        <form action="">
+        <div class="pname">
+            <div class="mb-3 w-50">
+                <label for="exampleInputEmail1" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="mb-3 w-50 me-4">
+                <label for="exampleInputEmail1" class="form-label">Actual Price</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3 w-50">
+                <label for="exampleInputEmail1" class="form-label">Selling Price</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+        </div>
+
+
+        <div class="input-group mt-4 w-50 ps-0 pe-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Select Category</span>
+            <select name="categoryName" class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <% for(var i=0;i<category.length; i++) { %>
+                <option value="<%=category[i].categoryName %>"><%= category[i].categoryName %></option>
+                <% } %>
+              </select>  
+        </div>
+           
+        <div class="d-flex">
+        <div class="input-group mt-4 w-50 ps-0 pe-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Select Brand</span>
+            <select name="categoryName" class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <% for(var i=0;i<brands.length; i++) { %>
+                <option value="<%=brands[i].brandName %>"><%=brands[i].brandName %></option>
+                <% } %>
+              </select>  
+        </div>
+        <div class="input-group mt-4 w-50 pe-3">
+          <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
+          <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+        
+        <div class="form-floating mt-4 ">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+          <label for="floatingTextarea2">Description</label>
+        </div>
+
+
+        <div class="input-group mt-4">
+          <input type="file" class="form-control" name="image" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" >
+          
+      </div>
+      <div class="d-felx justify-content-center mt-3">
+          
+              <input type="submit" value="ADD PRODUCT" class="btn btn-success m-2">
+              <input type="reset" value="RESET ITEM" class="btn btn-warning m-2 w-25">
+       
+      </div>
+       
+    </form>
+    </div>
+</section>
