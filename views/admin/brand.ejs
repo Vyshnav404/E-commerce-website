@@ -61,7 +61,7 @@
         <tr>
           <th scope="row"><%= i+1 %></th>
           <td><%=brandDetails[i].brandName %></td>
-          <td><a href="" class="btn btn-warning">EDIT</a></td>
+          <td><a onclick="Editbrand('<%=brandDetails[i]._id%>')" class="btn btn-warning">EDIT</a></td>
           <td><a onclick="Deletebrand('<%=brandDetails[i]._id%>')" class="btn btn-danger">DELETE</a></td>
         </tr>
         <% } %>

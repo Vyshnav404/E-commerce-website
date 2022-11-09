@@ -5,6 +5,34 @@ const getCategory = require('../controllers/admin/admincategory')
 const getProduct = require('../controllers/admin/admproduct')
 const sessionChecker = require('../middleware/sessionmiddleware')
 const getBrand = require('../controllers/admin/admbrand')
+const multer = require('multer')
+
+// storage setting
+const storage = multer.diskStorage({
+    destination:'./Public/images',
+    filename:(req,file,cb)=>{
+        cb(null,Date.now() + file.originalname)
+    }
+})
+
+// upload setting
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb)=>{
+        if(
+            file.mimetype == 'image/jpeg'||
+            file.mimetype == 'image/jpg'||
+            file.mimetype == 'image/png'||
+            file.mimetype == 'image/gif'||
+            file.mimetype == 'image/webp'
+        ){
+            cb(null, true)
+        }else{
+            cb(null, false);
+            cb(new Error('Only jpeg,jpg,png and gif image allow'))
+        }
+    }
+})
 
 
 // for admin login
@@ -21,12 +49,17 @@ router.delete('/deleteCategory',sessionChecker.adminSessionChecker,getCategory.d
 // for product
 router.get('/product',sessionChecker.adminSessionChecker,getProduct.showProduct)
 router.get('/addproduct',sessionChecker.adminSessionChecker,getProduct.addProductPage)
-
+router.post('/addproductdata',upload.single('productimage'),sessionChecker.adminSessionChecker,getProduct.addProduct)
+router.delete('/deleteproduct',getProduct.deleteoneProduct)
 
 // for brand
 router.get('/brand',sessionChecker.adminSessionChecker,getBrand.brandTable)
 router.post('/addbrand',sessionChecker.adminSessionChecker,getBrand.addtoBrand)
 router.delete('/deleteBrand',sessionChecker.adminSessionChecker,getBrand.deleteBrand)
+
+
+// for dashboard
+router.get('/dashboard',sessionChecker.adminSessionChecker,adminset.viewDashboard)
 
 // for logout
 router.get('/logout',adminset.adminLogout)

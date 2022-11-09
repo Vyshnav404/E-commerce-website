@@ -10,7 +10,7 @@ const adminLoginHome =(req,res)=>{
      adminget.adminDologin(req.body).then((response)=>{
         if(response.status){
             req.session.admin=true
-            res.render("admin/adminpage",{admin:true,user:false ,title:""})
+            res.render("admin/adminpage",{admin:true,user:false ,title:"Dashboard"})
         }else{
             res.redirect('/admin')
         }
@@ -28,11 +28,16 @@ const adminLogout =(req,res)=>{
     })
 }
 
+const viewDashboard = (req,res)=>{
+    res.render('admin/adminpage',{admin:true,user:false,title:"Dashboard"})
+}
+
 
 
 module.exports={
     adminlogin,
     adminLoginHome,
-    adminLogout
+    adminLogout,
+    viewDashboard
 
 }

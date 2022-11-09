@@ -6,17 +6,40 @@
         <tr>
           <th scope="col">NO.</th>
           <th scope="col">Product Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">selling Price</th>
           <th scope="col">Image</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
+        <% for(let i=0;i<product.length;i++) {%>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th scope="row"><%= i+1%></th>
+          <td><%=product[i].productName%></td>
+          <td><%=product[i].quantityName%></td>
+          <td><%=product[i].sellingPrice%></td>
+          <td><img src="/images/<%=product[i].picture %>" style="width: 4em; height:4em;" alt=""></td>
+          <td><a href="" class="btn btn-warning">Edit</a>
+          <a onclick="Deleteproduct('<%=product[i]._id%>')" class="btn btn-danger">Delete</a></td>
         </tr>
+        <% } %>
       </tbody>
   </table>
 </div>
+
+<script>
+  function Deleteproduct(productId){
+    fetch('/admin/deleteproduct',{
+      method:'delete',
+      headers:{
+        'Content-Type':'application/JSON'
+      },
+      body:JSON.stringify({
+        productId
+      })
+    }).then(()=>{
+      window.location.reload()
+    })
+  }
+</script>

@@ -22,6 +22,8 @@ const deleteBrand=(req,res)=>{
       })
 }
 
+
+
 module.exports={
     brandTable,
     addtoBrand,
