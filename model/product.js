@@ -12,6 +12,14 @@ module.exports={
         })
     },
 
+    showOneProduct:(id)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.Product_Details).findOne({_id:ObjectId(id)}).then((response)=>{
+                resolve(response)
+            })
+        })
+    },
+
 
     addProduct:(imageId,proDetails)=>{
         return new Promise(async(resolve,reject)=>{
@@ -28,5 +36,30 @@ module.exports={
                 resolve(data)
             })
         })
+    },
+
+    editInProduct:(id,editDetails,imagename)=>{
+        console.log(id);
+        console.log(imagename);
+         return new Promise(async(resolve,reject)=>{
+           await db.get().collection(collection.Product_Details).updateOne({_id:ObjectId(id)},{
+                $set:{
+                    picture:imagename,
+                    productName:editDetails.productName,
+                    actualPrice:editDetails.actualPrice,
+                    sellingPrice:editDetails.sellingPrice,
+                    categoryName:editDetails.categoryName,
+                    brandName:editDetails.brandName,
+                    quatityName:editDetails.quantityName,
+                    productDescription:editDetails.productDescription,
+                    addToTrendingProduct:editDetails.addToTrendingProduct,
+                    addToNewlyArrivedProduct:editDetails.addToNewlyArrivedProduct
+
+                }
+            }).then((data)=>{
+            
+                resolve(data)
+            })
+         })
     }
 }

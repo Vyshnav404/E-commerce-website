@@ -6,6 +6,7 @@ const getProduct = require('../controllers/admin/admproduct')
 const sessionChecker = require('../middleware/sessionmiddleware')
 const getBrand = require('../controllers/admin/admbrand')
 const multer = require('multer')
+const methodOverride = require('method-override')
 
 // storage setting
 const storage = multer.diskStorage({
@@ -35,6 +36,8 @@ const upload = multer({
 })
 
 
+router.use(methodOverride('_method'));
+
 // for admin login
 router.get("/",sessionChecker.adminSessionChecker,adminset.adminlogin)
 router.post('/login',adminset.adminLoginHome)
@@ -51,11 +54,14 @@ router.get('/product',sessionChecker.adminSessionChecker,getProduct.showProduct)
 router.get('/addproduct',sessionChecker.adminSessionChecker,getProduct.addProductPage)
 router.post('/addproductdata',upload.single('productimage'),sessionChecker.adminSessionChecker,getProduct.addProduct)
 router.delete('/deleteproduct',getProduct.deleteoneProduct)
+router.put('/editdata/:id',upload.single('productimage'),sessionChecker.adminSessionChecker,getProduct.addEditproduct)
+// router.put('/editdata',upload.single('productName'),sessionChecker.adminSessionChecker,getProduct.addEditproduct)
 
 // for brand
 router.get('/brand',sessionChecker.adminSessionChecker,getBrand.brandTable)
 router.post('/addbrand',sessionChecker.adminSessionChecker,getBrand.addtoBrand)
 router.delete('/deleteBrand',sessionChecker.adminSessionChecker,getBrand.deleteBrand)
+router.get('/editproduct',sessionChecker.adminSessionChecker,getProduct.editProduct)
 
 
 // for dashboard
