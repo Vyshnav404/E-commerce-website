@@ -5,6 +5,7 @@ const getCategory = require('../controllers/admin/admincategory')
 const getProduct = require('../controllers/admin/admproduct')
 const sessionChecker = require('../middleware/sessionmiddleware')
 const getBrand = require('../controllers/admin/admbrand')
+const getUser = require('../controllers/admin/adminusermodel')
 const multer = require('multer')
 const methodOverride = require('method-override')
 
@@ -67,8 +68,11 @@ router.get('/editproduct',sessionChecker.adminSessionChecker,getProduct.editProd
 // for dashboard
 router.get('/dashboard',sessionChecker.adminSessionChecker,adminset.viewDashboard)
 
+// for user
+router.get('/user',sessionChecker.adminSessionChecker,getUser.showUser)
+
 // for logout
 router.get('/logout',adminset.adminLogout)
 
 
-module.exports = router;
+module.exports = router

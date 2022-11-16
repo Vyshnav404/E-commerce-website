@@ -6,6 +6,15 @@ if(req.session.admin){
 }
 }
 
+const userSessionChecker = (req,res,next)=>{
+    if(req.session.loggedIn){
+        next()
+    }else{
+        res.redirect('/tologin')
+    }
+}
+
 module.exports={
-    adminSessionChecker
+    adminSessionChecker,
+    userSessionChecker
 }

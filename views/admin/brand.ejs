@@ -1,46 +1,10 @@
 
 <!-- Button trigger modal -->
 <div class="container product">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Add Brand
-    </button>
-    </div>
-  
-  <!-- Modal -->
-  <form action="/admin/addbrand" method="post">
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <label for="addbrand">ADD BRAND</label>
-            <input type="text" name="brandName" id="newCategory">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-      </div>
-    </div>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Brand
+  </button>
   </div>
-</form>
-
-
-<!-- javascript of modal  -->
-
-
-<script>
-    const myModal = document.getElementById('myModal')
-   const myInput = document.getElementById('myInput')
-   
-   myModal.addEventListener('shown.bs.modal', () => {
-   myInput.focus()
-   })
-   </script>
-
 
   <!-- table -->
   <div class="container">
@@ -85,3 +49,41 @@
         })
     }
 </script>
+
+
+
+
+<!-- Modal -->
+<form action="/admin/addbrand" method="post">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label for="addbrand">ADD BRAND</label>
+          <input type="text" name="brandName" id="newCategory">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+<!-- javascript of modal  -->
+
+
+<script>
+  const myModal = document.getElementById('myModal')
+ const myInput = document.getElementById('myInput')
+ 
+ myModal.addEventListener('shown.bs.modal', () => {
+ myInput.focus()
+ })
+ </script>

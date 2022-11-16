@@ -1,0 +1,30 @@
+<br>
+<br><br>
+<br>
+
+<div class="container">
+    <div class="bname">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+              <th scope="col">NO</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Blocked User</th>
+              <th scope="col">Unblock User</th>
+            </tr>
+          </thead>
+          <tbody>
+           <% for (var i=0; i<user.length;i++) { %>
+            <tr>
+                <th scope="row"><%= i+1 %></th>
+                <td><%= user[i].Username %></td>
+                <td><%= user[i].Email %></td>
+                <td><a href="" class="btn btn-danger">Block</a></td>
+                <td><a href="" class="btn btn-success">Unblock</a></td>
+              </tr>
+            <% } %>
+          </tbody>
+      </table>
+    </div>
+</div>

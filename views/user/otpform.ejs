@@ -1,7 +1,36 @@
-<div class="d-flex justify-content-center align-items-center container">
-    <div class="card py-5 px-3">
-        <h5 class="m-0">Mobile phone verification</h5><span class="mobile-text">Enter the code we just send on your mobile phone <b class="text-danger">+91 86684833</b></span>
-        <div class="d-flex flex-row mt-5"><input type="text" class="form-control" autofocus=""><input type="text" class="form-control"><input type="text" class="form-control"><input type="text" class="form-control"></div>
-        <div class="text-center mt-5"><span class="d-block mobile-text">Don't receive the code?</span><span class="font-weight-bold text-danger cursor">Resend</span></div>
+
+  <div class="applybg">
+    <div class="container mt-5">
+      <div class="row ">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+          <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+            <div class="card-img-left-point d-none d-md-flex">
+              <!-- Background image for card set in CSS! -->
+            </div>
+            <div class="card-body p-4 p-sm-5">
+              <h5 class="card-title text-center mb-5 fw-light fs-5"> OTP VERIFY</h5>
+              <form action="/otpverify" method="post">
+  
+                <div class="form-floating mb-3">
+                    <input class="input100" type="text" name="otp" id="otp" placeholder="enter the otp">
+                 
+                </div>
+
+  
+                
+  
+                <div class="d-grid mb-2">
+                  <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Verify</button>
+                </div>
+  
+               
+  
+                
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>

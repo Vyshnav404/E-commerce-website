@@ -1,9 +1,10 @@
-body {
+.applybg{
   background: #007bff;
   background: linear-gradient(to right, #6483ab, #357eaf);
+  height:90vh;
 }
 
-.card-img-left {
+.card-img-left-point {
   width: 45%;
   /* Link to your background image using in the property below! */
   background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
@@ -26,42 +27,3 @@ body {
   background-color: #3b5998;
 }
 
-/* for otp */
-.card {
-  width: 350px;
-  padding: 10px;
-  border-radius: 20px;
-  background: #fff;
-  border: none;
-  height: 350px;
-  position: relative;
-}
-
-.container {
-  height: 100vh;
-}
-
-body {
-  background: #eee;
-}
-
-.mobile-text {
-  color: #989696b8;
-  font-size: 15px;
-}
-
-.form-control {
-  margin-right: 12px;
-}
-
-.form-control:focus {
-  color: #495057;
-  background-color: #fff;
-  border-color: #ff8880;
-  outline: 0;
-  box-shadow: none;
-}
-
-.cursor {
-  cursor: pointer;
-}
