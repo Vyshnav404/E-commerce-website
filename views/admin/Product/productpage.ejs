@@ -30,7 +30,14 @@
 
 <script>
   function Deleteproduct(productId){
-    fetch('/admin/deleteproduct',{
+   swal({
+    title: "DELETE!",
+    text: "Do you want to Delete the item",
+    icon: "warning",
+    buttons: ["Cancel","OK"]
+   }).then(val=>{
+    if(val){
+      fetch('/admin/deleteproduct',{
       method:'delete',
       headers:{
         'Content-Type':'application/JSON'
@@ -41,5 +48,8 @@
     }).then(()=>{
       window.location.reload()
     })
+    }
+   })
+    
   }
 </script>

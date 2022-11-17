@@ -4,6 +4,8 @@ const getLogin = require('../controllers/user/login')
 const getCart = require('../controllers/user/cart');
 const { SessionChecker } = require('../middleware/sessionmiddleware');
 const sessionChecker= require('../middleware/sessionmiddleware')
+const getCategory = require('../controllers/user/categorybase')
+const userProduct = require('../controllers/user/userProductview')
 
 
 
@@ -17,9 +19,16 @@ router.post('/signupdb',getLogin.userRegister)
 router.post('/loginaction',getLogin.loginAction)
 router.post('/otpverify',getLogin.otpverification)
 
+// for categorybase
+router.get('/categorybase',getCategory.loadCategory)
 
 // for cart setting
 router.get('/cart',sessionChecker.userSessionChecker,getCart.clickCart)
+router.get('/add-to-cart/:id',)
+
+
+// for userProduct single view
+router.get('/viewProductDetailsPage',userProduct.showProductDetails)
 
 // for userlogout
 router.get('/userlogout',getLogin.userLogout)

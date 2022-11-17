@@ -46,7 +46,7 @@ router.post('/login',adminset.adminLoginHome)
 
 // for category
 router.get('/category',sessionChecker.adminSessionChecker,getCategory.showCategory)
-router.post('/addcategory',sessionChecker.adminSessionChecker,getCategory.addCategory)
+router.post('/addcategory',upload.single('categoryimg'),sessionChecker.adminSessionChecker,getCategory.addCategory)
 router.delete('/deleteCategory',sessionChecker.adminSessionChecker,getCategory.deleteCategory)
 
 
@@ -70,6 +70,8 @@ router.get('/dashboard',sessionChecker.adminSessionChecker,adminset.viewDashboar
 
 // for user
 router.get('/user',sessionChecker.adminSessionChecker,getUser.showUser)
+router.post('/usermanagement/block',sessionChecker.adminSessionChecker,getUser.userBlock)
+router.post('/usermanagement/unblock',sessionChecker.adminSessionChecker,getUser.userUnblock)
 
 // for logout
 router.get('/logout',adminset.adminLogout)

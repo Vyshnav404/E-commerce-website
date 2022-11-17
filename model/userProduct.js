@@ -1,5 +1,6 @@
 const db = require('../config/connection');
-const collection = require('../config/collection')
+const collection = require('../config/collection');
+const { ObjectId } = require('mongodb');
 
 
 module.exports = {
@@ -9,5 +10,21 @@ module.exports = {
             resolve(productDetails)
         })
     },
+    viewCatBase :(catname)=>{
+        return new Promise(async(resolve,reject)=>{
+          let catProducts= await db.get().collection(collection.Product_Details).aggregate([{
+            $match:{categoryName:catname}
+          }]).toArray()
+          resolve(catProducts)
+        })
+    },
+
+    viewProductDetails:(productId)=>{
+      return new Promise((resolve,reject)=>{
+        db.get().collection(collection.Product_Details).findOne({_id:ObjectId(productId)}).then((product)=>{
+          resolve(product)
+        })
+      })
+    }
 }
 

@@ -6,6 +6,22 @@ const showUser = (req,res)=>{
     })
 }
 
+
+const userBlock = (req,res)=>{
+    getUser.blockUser(req.body.userId).then((response)=>{
+        res.json({status:true})
+    })
+}
+
+
+const userUnblock = (req,res)=>{
+    getUser.unblockUser(req.body.userId).then((response)=>{
+        res.json({status:true})
+    })
+}
+
 module.exports ={
-    showUser
+    showUser,
+    userBlock,
+    userUnblock
 }

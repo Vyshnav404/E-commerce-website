@@ -10,8 +10,8 @@
               <th scope="col">NO</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">Blocked User</th>
-              <th scope="col">Unblock User</th>
+              <th scope="col">Action</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -20,11 +20,47 @@
                 <th scope="row"><%= i+1 %></th>
                 <td><%= user[i].Username %></td>
                 <td><%= user[i].Email %></td>
-                <td><a href="" class="btn btn-danger">Block</a></td>
-                <td><a href="" class="btn btn-success">Unblock</a></td>
+
+                <td>
+                <% if(user[i].state=="active") { %>
+                <a class="btn btn-danger" onclick="userBlock('<%= user[i]._id %>')">Block</a>
+                  <% } else { %>
+                <a class="btn btn-success" onclick="userUnblock('<%= user[i]._id %>')">Unblock</a>
+              <% } %>
+            </td>
               </tr>
             <% } %>
           </tbody>
       </table>
     </div>
 </div>
+
+
+
+<script>
+  function userBlock(userId){
+    fetch('/admin/usermanagement/block',{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'   
+      },
+      body:JSON.stringify({userId})
+    }).then(()=>{
+      window.location.reload()
+    }).catch((error)=>{
+      console.error("error",error);
+    })
+  }
+
+  function userUnblock(userId){
+    fetch('/admin/usermanagement/unblock',{
+      method:'post',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({userId})
+    }).then(()=>{
+      window.location.reload()
+    }).catch((error)=>{
+      console.error("error",error);
+    })
+  }
+</script>

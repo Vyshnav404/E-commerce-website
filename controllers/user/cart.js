@@ -7,6 +7,10 @@ const clickCart = (req,res)=>{
     res.render('user/userCart',{admin:false,user:true,userData})
 }
 
+const addTocart = (req,res)=>{
+    
+}
+
 module.exports= {
     clickCart
 }

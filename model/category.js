@@ -14,10 +14,10 @@ module.exports={
         })
     },
 
-    addTocategory:(categoryDetails)=>{
+    addTocategory:(imageId,categoryDetails)=>{
         return new Promise(async(resolve,reject)=>{
-         db.get().collection(collection.Category_Details).insertOne(categoryDetails).then((data)=>{
-                resolve(data)
+         db.get().collection(collection.Category_Details).insertOne(imageId,categoryDetails).then((data)=>{
+                resolve.apply(data)
             })
         })
     },

@@ -13,7 +13,7 @@
     </div>
     <!-- Modal -->
     <br>
-    <form action="/admin/addcategory" method="post">
+    <form action="/admin/addcategory" method="post" enctype="multipart/form-data">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -25,6 +25,12 @@
             <label for="addcategory">ADD CATEGORY</label>
             <input type="text" name="categoryName" id="newCategory">
           </div>
+
+          <div class="modal-body">
+            <label for="addcategory">ADD IMAGE</label>
+            <input type="file" name="categoryimg" id="newCategoryimg">
+          </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
@@ -50,6 +56,7 @@
             <tr>
               <th scope="col">NO</th>
               <th scope="col">Name</th>
+              <th scope="col">Image</th>
               <th scope="col">Edit Category</th>
               <th scope="col">Delete Category</th>
             </tr>
@@ -59,6 +66,7 @@
             <tr>
                 <th scope="row"><%= i+1 %></th>
                 <td><%= category[i].categoryName %></td>
+                <td><img src="/images/<%= category[i].picture %>" style="width:4em; height:4em;"></td>
                 <td><a href="" class="btn btn-warning">EDIT</a></td>
                 <td><a onclick="Deletecategory('<%=category[i]._id%>')" class="btn btn-danger">DELETE</a></td>
               </tr>
