@@ -1,1 +1,61 @@
-<h1>cart page</h1>
+<div class="container-fluid">
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+          <th scope="col">SL NO</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Image</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(products.length>0) {%> 
+        <tr>
+          <% for(i=0;i<products.length;i++) {%>
+          <th scope="row"><%=i+1 %></th>
+          <td><%=products[i].product.productName %></td>
+          <td><img src="/images/<%=products[i].product.picture %>" style="width: 4em; height:4em;"></td>
+          <td><%=products[i].product.sellingPrice %></td>
+
+          
+          <td>
+            <button class="cart-item-count btn btn-primary mr-3" onclick="changeQuantity('<%=products[i]._id%>','<%=products[i].product._id%>',-1)">-</button><%=products[i].quantity%><button class="cart-item-count btn btn-primary ml-3" onclick="changeQuantity('<%=products[i]._id%>','<%=products[i].product._id%>',1)">+</button>
+          </td>
+          <td>
+            <% let Total = products[i].quantity* products[i].product.sellingPrice %>
+            <%= Total %>
+          </td>
+          <td>
+            <button class="btn btn-danger">Delete</button>
+          </td>
+         
+
+        </tr>
+        <% } %>
+        <% } %>
+      </tbody>
+  </table>
+</div>
+
+
+<script>
+  function changeQuantity(cartId,proId,count){
+     $.ajax({
+      url:'/change-product-quantity',
+      data:{
+        cart:cartId,
+        product:proId,
+        count:count
+      },
+      method:'post',
+      success:(response)=>{
+        alert(response)
+      }
+    
+     })
+  }
+</script>

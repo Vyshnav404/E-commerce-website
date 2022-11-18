@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer')
 const userProductView = require('../../model/userProduct');
 const categoryView = require('../../model/category')
 const { Product_Details } = require('../../config/collection');
+const viewCart = require('../../model/userCart')
 
 
 // OTP setting
@@ -21,12 +22,18 @@ let mailTransporter = nodemailer.createTransport({
 // OTP end
 
 
-const firstClick = (req,res)=>{
+const firstClick = async (req,res)=>{
   let userData=req.session.user
-  console.log(userData);
+
+    let cartCount=null
+
+      if(req.session.user){
+        cartCount = await viewCart.getCartCount(req.session.user._id)
+      }
+     
     userProductView.displayProduct().then((productDetails)=>{
     categoryView.showCategory().then((category)=>{
-        res.render('user/userhomepage',{admin:false,user:true,productDetails,category,userData})
+        res.render('user/userhomepage',{admin:false,user:true,productDetails,category,userData,cartCount})
     })
     })
    
@@ -67,7 +74,7 @@ const userRegister =(req,res)=>{
   });
 
     userlog.doSignUp(req.body,verified).then((response)=>{
-        console.log(response);
+      
         userId = response.insertedId
 
         res.render('user/otpform',{admin:false,user:false})

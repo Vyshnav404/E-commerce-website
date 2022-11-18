@@ -24,9 +24,10 @@ router.get('/categorybase',getCategory.loadCategory)
 
 // for cart setting
 router.get('/cart',sessionChecker.userSessionChecker,getCart.clickCart)
-router.get('/add-to-cart/:id',)
+router.get('/add-to-cart/:id',getCart.addTocart)
+router.post('/change-product-quantity',getCart.changeProductQuantity)
 
-
+  
 // for userProduct single view
 router.get('/viewProductDetailsPage',userProduct.showProductDetails)
 

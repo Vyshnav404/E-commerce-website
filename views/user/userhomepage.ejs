@@ -227,7 +227,8 @@
                     <% if(userData) {%>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                         <a href="/viewProductDetailsPage?id=<%= productDetails[i]._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        <!-- <a href="/add-to-cart/?id=<%= productDetails[i]._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
+                        <button onclick="addToCar('<%=productDetails[i]._id%>')" class="btn btn-light">Add to cart</button>
                     </div>
                     <% } else { %>
                         <div class="card-footer d-flex justify-content-between bg-light border">
@@ -438,3 +439,27 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        function addToCar(proId){
+            
+    $.ajax({
+
+        url:'/add-to-cart/'+proId,
+
+        method:'get',
+        success:(response)=>{
+
+             if(response.status){
+                let count = $('#cart-count').html()
+                count = parseInt(count)+1
+                $('#cart-count').html(count)
+            }
+        
+        }
+    })
+     
+}
+    </script>
+
+    
