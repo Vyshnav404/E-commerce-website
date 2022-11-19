@@ -84,6 +84,11 @@ const userRegister =(req,res)=>{
 
 
 const otpverification = async (req,res) => {
+
+  let cartCount= null
+    if(req.session.user){
+        cartCount = await viewCart.getCartCount(req.session.user._id)
+      }
     console.log("otp send is ",OTP);
     console.log("otp recieved is ",req.body.otp);
   
@@ -95,7 +100,7 @@ const otpverification = async (req,res) => {
                 categoryView.showCategory().then((category)=>{
                     req.session.user = response.user
                     let userData = req.session.user
-                    res.render("user/userhomepage",{admin:false,user:true,productDetails,category,userData});
+                    res.render("user/userhomepage",{admin:false,user:true,productDetails,category,userData,cartCount});
                 })
             })
         })
