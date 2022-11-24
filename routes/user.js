@@ -30,6 +30,7 @@ router.post('/change-product-quantity',getCart.changeProductQuantity)
 
 // for whislist setting
 router.get('/whislist',sessionChecker.userSessionChecker,getWhislist.clickWhislist)
+router.post('/addtowhishlist',sessionChecker.userSessionChecker,getWhislist.addToWhishlist)
   
 // for userProduct single view
 router.get('/viewProductDetailsPage',userProduct.showProductDetails)

@@ -1,1 +1,30 @@
-<h1>whishlist page</h1>
+
+<div class="container"> 
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">SLNO.</th>
+        <th scope="col">Product</th>
+        <th scope="col">Image</th>
+        <th scope="col">Price</th>
+        <th scope="col">Add to cart</th>
+        <th scope="col">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+       <% for(var i=0;i<products.length;i++) {%>
+      <tr>
+        <th scope="row"><%= i+1 %></th>
+        <td><%=products[i].product.productName %></td>
+        <td><img src="/images/<%=products[i].product.picture %>" style="width: 4em; height:4em;"></td>
+        <td>Rs:<%=products[i].product.sellingPrice %></td>
+        <td><button class="btn btn-sm btn-primary">ADD TO CART</button></td>
+        <td><button class="btn btn-sm btn-danger">REMOVE</button></td>
+        
+      </tr>
+   
+      <% } %>
+    </tbody>
+  </table>
+</div>
