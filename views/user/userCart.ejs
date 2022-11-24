@@ -19,13 +19,15 @@
           <th scope="row"><%=i+1 %></th>
           <td><%=products[i].product.productName %></td>
           <td><img src="/images/<%=products[i].product.picture %>" style="width: 4em; height:4em;"></td>
-          <td><%=products[i].product.sellingPrice %></td>
+          <td>Rs:<%=products[i].product.sellingPrice %></td>
 
           
           <td>
-            <button class="cart-item-count btn btn-primary mr-3" onclick="changeQuantity('<%=products[i]._id%>','<%=products[i].product._id%>',-1)">-</button><%=products[i].quantity%><button class="cart-item-count btn btn-primary ml-3" onclick="changeQuantity('<%=products[i]._id%>','<%=products[i].product._id%>',1)">+</button>
+            <button class="cart-item-count btn btn-primary mr-3" onclick="changeQuantity('<%=products[i]._id%>','<%=products[i].product._id%>','<%= userData._id %>',-1)">-</button>
+            <span id="<%= products[i].product._id %>"><%=products[i].quantity%></span>
+            <button class="cart-item-count btn btn-primary ml-3" onclick="changeQuantity('<%=products[i]._id%>','<%=products[i].product._id%>','<%= userData._id %>',1)">+</button>
           </td>
-          <td>
+          <td>Rs:
             <% let Total = products[i].quantity* products[i].product.sellingPrice %>
             <%= Total %>
           </td>
@@ -39,23 +41,53 @@
         <% } %>
       </tbody>
   </table>
+  <hr>
+  <div class="float-right pr-5 mt-4">
+  <h2 class="float-right mr-5">Total:Rs.<span id="totalP"><%= totalValue %></span></h2>
+  <a href="/place-order" class="float-right btn btn-success mt-3" style="width: 80%;">Place Order</a>
+  </div>
+  
 </div>
 
 
 <script>
-  function changeQuantity(cartId,proId,count){
+  function changeQuantity(cartId,proId,userId,count){
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count =parseInt(count)
      $.ajax({
       url:'/change-product-quantity',
       data:{
+        user:userId,
         cart:cartId,
         product:proId,
-        count:count
+        count:count,
+        quantity:quantity
       },
       method:'post',
       success:(response)=>{
-        alert(response)
+        if(response.removeProduct){
+          swal({
+            title:"REMOVE",
+            text:"Do you want to remove the item",
+            icon:"warning",
+            buttons:["Cancel","OK"]
+           }).then(val=>{
+            if(val){
+             
+          location.reload()
+            }
+           })
+        }else{
+          document.getElementById(proId).innerHTML=quantity+count
+          document.getElementById('totalP').innerHTML=response.total
+        
+
+        }
+        
       }
     
      })
   }
+
+   
 </script>

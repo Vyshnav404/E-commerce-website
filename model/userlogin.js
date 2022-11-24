@@ -20,7 +20,7 @@ module.exports = {
             let user = await db.get().collection(collection.User_Details).findOne({Username:userDetails.username})
             if(user){
                 if(user.verified == 1 && user.state=="active"){
-                    console.log(user);
+                    
                     bcrypt.compare(userDetails.Password,user.Password).then((status)=>{
                         if(status){
                             console.log("login success");

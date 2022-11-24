@@ -1,0 +1,141 @@
+<body style="    overflow-x: hidden;">
+	
+
+    <section class="bg-light" style="overflow: hidden;">
+    
+        <div class="container bg-light " >
+            <div class="row ">
+    
+    
+    
+            <div class="container col-md-6 mt-5" style="    padding-bottom: 113px;">
+                
+                <form  id="checkout-form" style="    margin-bottom: 152px;" >
+                    <div class="row" z>
+                        <div class="col-md-6">
+                            <div class="row"><h3>Enter delivery details</h3></div><br>
+                        </div>
+                        <div>
+                            <div class="mb-3 "><input type="text" placeholder="Enter your name " id="name" name="name"class="form-control "></div>														
+                        <input type="text" class="form-control mb-3 "  required id="address" placeholder="Address" name="address"></div>
+                        <div class="mb-3"><input type="text" class="form-control" required id="pincode" placeholder="Pincode" name="pincode"></div>
+                        <div class="mb-3"><input type="text" class="form-control" id="mobile" placeholder="Mobile" required name="mobile"></div>
+    
+                        
+                        
+                        <input type="text" name="userId" style="display:none ;"   id=""   value="<%=userData._id %>">
+                    </div>
+            </div>
+            <div class="col-md-5">
+                <br><br><br>
+                <div class="container mt-5  checkout ">
+                    <h5>Total Amount : RS.  <%= total %>
+                    </h5>
+                    <hr>
+                    <div class="payment">
+                        <p>Payment Method</p>
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="payment-method" value="COD" checked>COD
+                        </label>
+                        <label for=" " class="radio-inline mt-2">
+                            <input type="radio" name="payment-method" value="ONLINE">Online Payment
+                        </label>
+                        <button class="btn btn-primary float-right" type="submit">Checkout</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    
+        </div>
+    
+        <br><br><br>
+        
+    </div>
+        </div>
+    </section>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  $("#checkout-form").submit((e)=>{
+    e.preventDefault()
+    $.ajax({
+        url:'/place-orderPay',
+        method:'post',
+        data:$('#checkout-form').serialize(),
+        success:(response)=>{
+            console.log("gdgd",response)
+            if(response.codSuccess){
+                location.href='/orderPlaced'
+            }else{
+                console.log(response);
+                razorpayPayment(response)
+            }
+        }
+    })
+  })
+
+
+  function razorpayPayment(order){
+    var options = {
+            "key": "rzp_test_9oT5CWpksAyeFQ", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "woodQ Furniture",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "callback_url": "https:eneqd3r9zrjok.x.pipedream.net/",
+            "handler": function (response) {
+                verifyPayment(response, order)
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        console.log(options);
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+  }
+
+  function verifyPayment(payment,order){
+        $.ajax({
+            url:'/verify-payment',
+            data:{
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href='/orderPlaced'
+                }else{
+                    alert("Payment failed")
+                }
+            }
+        })
+  }
+</script>
+
+    <style>
+        input[type=radio] {
+            width: 20px;
+            height: 20px;
+        }
+        label.radio-inline {
+            display: flex;
+            align-items: center;
+        }
+        .checkout {
+            border: 1px solid;
+            border-radius: 3px;
+            padding: 30px;
+        }
+        .payment {
+            padding-bottom: 16px;
+        }
+    </style>
+    </body>

@@ -1,0 +1,34 @@
+
+<div class="container">
+<table class="table" style="border: 1px solid black; margin-top: 2%;">
+    <thead class="bg-warning">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Address</th>
+        <th scope="col">Pincode</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Payment</th>
+        <th scope="col">status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <% for(i=0;i<orders.length;i++) { %>
+      <tr>
+        <td><%= orders[i].date%></td>
+        <td><%= orders[i].deliveryDetails.address %></td>
+        <td><%= orders[i].deliveryDetails.pincode %></td>
+        <td><%= orders[i].deliveryDetails.mobile %></td>
+        <td><%= orders[i].totalAmount %></td>
+        <td><%= orders[i].paymentMethod %></td>
+        <td><%= orders[i].status %></td>
+        <td>
+            <a href="/view-order-product?id=<%=orders[i]._id %>" class="btn btn-primary">View Products</a>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

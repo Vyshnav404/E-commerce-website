@@ -19,7 +19,7 @@ const addProductPage = (req,res)=>{
 }
 
 const addProduct = (req,res)=>{
-    const {
+    let {
         productName,
         actualPrice,
         sellingPrice,
@@ -30,7 +30,11 @@ const addProduct = (req,res)=>{
         addToTrendingProduct,
         addToNewlyArrivedProduct
     }=req.body
-
+    
+    sellingPrice = parseInt(sellingPrice)
+    actualPrice = parseInt(actualPrice)
+    quantityName = parseInt(quantityName)
+        
     viewProduct.addProduct({
         picture:req.file.filename,
         productName,

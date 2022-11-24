@@ -22,9 +22,11 @@ module.exports={
 
 
     addProduct:(imageId,proDetails)=>{
+        console.log(proDetails,"prooooo");
         return new Promise(async(resolve,reject)=>{
-            await db.get().collection(collection.Product_Details).insertOne(imageId,proDetails).then((data)=>{
+           await db.get().collection(collection.Product_Details).insertOne(imageId,proDetails).then((data)=>{
                 resolve.apply(data)
+            
             })
         })
     },
@@ -46,11 +48,11 @@ module.exports={
                 $set:{
                     picture:imagename,
                     productName:editDetails.productName,
-                    actualPrice:editDetails.actualPrice,
-                    sellingPrice:editDetails.sellingPrice,
+                    actualPrice:parseInt(editDetails.actualPrice),
+                    sellingPrice:parseInt(editDetails.sellingPrice),
                     categoryName:editDetails.categoryName,
                     brandName:editDetails.brandName,
-                    quatityName:editDetails.quantityName,
+                    quatityName:parseInt(editDetails.quantityName),
                     productDescription:editDetails.productDescription,
                     addToTrendingProduct:editDetails.addToTrendingProduct,
                     addToNewlyArrivedProduct:editDetails.addToNewlyArrivedProduct
@@ -59,6 +61,7 @@ module.exports={
             }).then((data)=>{
             
                 resolve(data)
+                
             })
          })
     }
