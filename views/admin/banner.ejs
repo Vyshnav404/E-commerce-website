@@ -1,0 +1,82 @@
+
+<br>
+<br><br>
+<br>
+<br>
+<div class="container">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add Banner
+    </button>
+    </div>
+    <!-- Modal -->
+    <br>
+    <form action="/admin/addbanner" method="post" enctype="multipart/form-data">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">ADD BANNER</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+         
+
+          <div class="modal-body">
+            <label for="addbanner">ADD IMAGE</label>
+            <input type="file" name="bannerimg" id="newBannerimg">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+       <!-- javascript of modal -->
+    <script>
+     const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+    
+    myModal.addEventListener('shown.bs.modal', () => {
+    myInput.focus()
+    })
+    </script>
+
+<div class="container">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+              <th scope="col">NO</th>
+              
+              <th scope="col">Image</th>
+            
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+           <% for (var i=0; i<banner.length;i++) { %>
+            <tr>
+                <th scope="row"><%= i+1 %></th>
+               
+                <td><img src="/images/<%= banner[i].picture %>" style="width:4em; height:4em;"></td>
+               
+                <td><a onclick="Deletebanner('<%=banner[i]._id%>')" class="btn btn-danger">DELETE</a></td>
+              </tr>
+            <% } %>
+          </tbody>
+      </table>
+    </div>
+
+    <script>
+      function Deletebanner(bannerId){
+        
+        fetch("/admin/deletebanner?id="+bannerId,{
+          
+          method:'delete',
+          
+        }).then(()=>{
+          window.location.reload()
+        })
+      }
+    </script>

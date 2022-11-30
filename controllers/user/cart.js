@@ -1,5 +1,6 @@
 const userCart = require('../../model/userCart')
 const userPay = require('../../model/payOrder')
+const userWhishlist=require('../../model/whishlistModel')
 
 
 const clickCart = async(req,res)=>{
@@ -13,9 +14,14 @@ const clickCart = async(req,res)=>{
     if(req.session.user){
         cartCount = await userCart.getCartCount(req.session.user._id)
       }
+
+      let whishlistCount = null
+      if(req.session.user){
+          whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+        }
      
      
-    res.render('user/userCart',{admin:false,user:true,userData,products,cartCount,totalValue})
+    res.render('user/userCart',{admin:false,user:true,userData,products,cartCount,totalValue,whishlistCount})
 }
 
 const addTocart = (req,res)=>{
@@ -43,9 +49,13 @@ const placeOrder = async(req,res)=>{
     if(req.session.user){
         cartCount = await userCart.getCartCount(req.session.user._id)
       }
+      let whishlistCount = null
+    if(req.session.user){
+        whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+      }
       
       let total = await userCart.getTotalAmount(req.session.user._id)
-    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total})
+    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount})
 }
 
 
@@ -73,7 +83,12 @@ const orderPlaced = async(req,res)=>{
     if(req.session.user){
         cartCount = await userCart.getCartCount(req.session.user._id)
       }
-    res.render('user/orderplaced',{admin:false,user:true,userData,cartCount})
+
+      let whishlistCount = null
+      if(req.session.user){
+          whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+        }
+    res.render('user/orderplaced',{admin:false,user:true,userData,cartCount,whishlistCount})
 }
 
 
@@ -83,10 +98,14 @@ const orderList = async(req,res)=>{
     if(req.session.user){
         cartCount = await userCart.getCartCount(req.session.user._id)
       }
+      let whishlistCount = null
+      if(req.session.user){
+          whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+        }
       
     let totalValue = await userCart.getTotalAmount(req.session.user._id)
     let orders = await userCart.getUserOrders(req.session.user._id)
-    res.render('user/vieworder',{userData,admin:false,user:true,totalValue,orders,cartCount})
+    res.render('user/vieworder',{userData,admin:false,user:true,totalValue,orders,cartCount,whishlistCount})
 }
 
 
@@ -97,11 +116,15 @@ const viewOrderProducts = async(req,res)=>{
         cartCount = await userCart.getCartCount(req.session.user._id)
       }
     
+      let whishlistCount = null
+      if(req.session.user){
+          whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+        }
     
     let products = await userCart.getOrderProducts(req.query)
     let oneProduct = await userCart.getOneProduct(req.query.id)
     console.log("haaaa",oneProduct);
-    res.render('user/viewOrderProducts',{admin:false,user:true,cartCount,userData,products,oneProduct})
+    res.render('user/viewOrderProducts',{admin:false,user:true,cartCount,userData,products,oneProduct,whishlistCount})
 
 }
 
@@ -115,6 +138,15 @@ const verifyPayment=(req,res)=>{
         res.json({status:false,errMsg:""})
     })
 }
+
+ const deleteFromCart= (req,res)=>{
+    let id = req.body.proId
+    userid = req.session.user._id
+
+    userCart.deleteOneProduct(userid,id).then((response)=>{
+        res.json(response)
+    })
+ }
  
 module.exports= {
     clickCart,
@@ -125,5 +157,6 @@ module.exports= {
     orderPlaced,
     orderList,
     viewOrderProducts,
-    verifyPayment
+    verifyPayment,
+    deleteFromCart
 }

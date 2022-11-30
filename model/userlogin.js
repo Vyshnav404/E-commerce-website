@@ -1,12 +1,21 @@
 const db = require('../config/connection')
 const collection = require('../config/collection')
 const bcrypt = require('bcrypt')
+const { ObjectId } = require('mongodb')
 
 module.exports = {
-    doSignUp:(userData,verified)=>{
+    doSignUp:async(userData,verified,state)=>{
+        userData.Password=await bcrypt.hash(userData.Password,10)
+        let userObj = {
+            Username:userData.Username,
+            Email:userData.Email,
+            Password:userData.Password,
+            verified,
+            state
+        }
         return new Promise(async(resolve,reject)=>{
-            userData.Password=await bcrypt.hash(userData.Password,10)
-            db.get().collection(collection.User_Details).insertOne(userData,verified).then((data)=>{
+           
+            db.get().collection(collection.User_Details).insertOne(userObj).then((data)=>{
                 resolve(data)
             })
         })
@@ -58,7 +67,9 @@ module.exports = {
                     resolve(response)
                 })
         })
-    }
+    },
+
+   
 
 }
 

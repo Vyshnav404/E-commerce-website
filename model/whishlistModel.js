@@ -84,7 +84,7 @@ getWishListProducts:(userId)=>{
 
            
         ]).toArray()
-      console.log("lllla",wishItems);
+      
         resolve(wishItems) 
         
     })
@@ -98,6 +98,20 @@ getWishListCount:(userId)=>{
             count = wishList.products.length
         }
         resolve(count)
+    })
+},
+
+deleteOneProduct:(userid,proId)=>{
+    
+    return new Promise(async(resolve,reject)=>{
+        await db.get().collection(collection.Whish_List).updateOne({user:ObjectId(userid)},
+        {
+            $pull:{products:{item:ObjectId(proId)}}
+        }
+        ).then((response)=>{
+            console.log("response",response);
+            resolve(response)
+        })
     })
 }
 

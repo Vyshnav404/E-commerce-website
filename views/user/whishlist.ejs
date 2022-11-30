@@ -19,8 +19,8 @@
         <td><%=products[i].product.productName %></td>
         <td><img src="/images/<%=products[i].product.picture %>" style="width: 4em; height:4em;"></td>
         <td>Rs:<%=products[i].product.sellingPrice %></td>
-        <td><button class="btn btn-sm btn-primary">ADD TO CART</button></td>
-        <td><button class="btn btn-sm btn-danger">REMOVE</button></td>
+        <td><button onclick="addToCarfromwish('<%=products[i].item%>')" class="btn btn-sm btn-primary">ADD TO CART</button></td>
+        <td><button onclick="DeleteFromWishlist('<%=products[i].item%>')" class="btn btn-sm btn-primary">X</button></td>
         
       </tr>
    
@@ -28,3 +28,49 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  function addToCarfromwish(proId){
+      console.log("passing id",proId);
+$.ajax({
+
+  url:'/add-to-cart/'+proId,
+
+  method:'get',
+  success:(response)=>{
+
+       if(response.status){
+          let count = $('#cart-count').html()
+          count = parseInt(count)+1
+          $('#cart-count').html(count)
+      }
+  
+  }
+})
+
+}
+
+function DeleteFromWishlist(proId){
+  swal({
+    title:"DELETE",
+    text:"Do you want to delete the item",
+    icon:'warning',
+    buttons:["Cancel","OK"]
+  }).then(val=>{
+    if(val){
+      fetch('/deletefromwishlist',{
+    method:'delete',
+    headers:{
+      'Content-Type':'application/JSON'
+    },
+    body:JSON.stringify({
+      proId
+    })
+  }).then(()=>{
+    window.location.reload()
+  })
+    }
+  })
+  
+}
+</script>

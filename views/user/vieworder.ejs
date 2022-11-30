@@ -5,8 +5,8 @@
       <tr>
         <th scope="col">Date</th>
         <th scope="col">Address</th>
-        <th scope="col">Pincode</th>
-        <th scope="col">Mobile</th>
+        <!-- <th scope="col">Pincode</th>
+        <th scope="col">Mobile</th> -->
         <th scope="col">Amount</th>
         <th scope="col">Payment</th>
         <th scope="col">status</th>
@@ -17,10 +17,11 @@
 
         <% for(i=0;i<orders.length;i++) { %>
       <tr>
-        <td><%= orders[i].date%></td>
-        <td><%= orders[i].deliveryDetails.address %></td>
-        <td><%= orders[i].deliveryDetails.pincode %></td>
-        <td><%= orders[i].deliveryDetails.mobile %></td>
+        <td><%let V=orders[i].date.toLocaleString()%><%=V%></td>
+        <td><%= orders[i].deliveryDetails.name %>,<br>
+          <%= orders[i].deliveryDetails.address %>,<br>
+        <%= orders[i].deliveryDetails.pincode %>,<br>
+        <%= orders[i].deliveryDetails.mobile %></td>
         <td><%= orders[i].totalAmount %></td>
         <td><%= orders[i].paymentMethod %></td>
         <td><%= orders[i].status %></td>

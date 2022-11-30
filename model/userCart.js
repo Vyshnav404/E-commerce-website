@@ -286,6 +286,19 @@ module.exports={
             
             
         })
-    } 
+    } ,
+
+    deleteOneProduct:(userid,proId)=>{
+        return new Promise(async(resolve,reject)=>{
+            await db.get().collection(collection.User_Cart).updateOne({user:ObjectId(userid)},
+            {
+                $pull:{products:{item:ObjectId(proId)}}
+            }
+            ).then((response)=>{
+                console.log("response",response);
+                resolve(response)
+            })
+        })
+    }
 
 } 

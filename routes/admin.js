@@ -6,6 +6,8 @@ const getProduct = require('../controllers/admin/admproduct')
 const sessionChecker = require('../middleware/sessionmiddleware')
 const getBrand = require('../controllers/admin/admbrand')
 const getUser = require('../controllers/admin/adminusermodel')
+const getBanner = require('../controllers/admin/admbanner')
+const getCoupon = require('../controllers/admin/admcoupon')
 const multer = require('multer')
 const methodOverride = require('method-override')
 
@@ -72,6 +74,18 @@ router.get('/dashboard',sessionChecker.adminSessionChecker,adminset.viewDashboar
 router.get('/user',sessionChecker.adminSessionChecker,getUser.showUser)
 router.post('/usermanagement/block',sessionChecker.adminSessionChecker,getUser.userBlock)
 router.post('/usermanagement/unblock',sessionChecker.adminSessionChecker,getUser.userUnblock)
+
+
+// for bannner
+router.get('/banner',sessionChecker.adminSessionChecker,getBanner.showBanner)
+router.post('/addbanner',upload.single('bannerimg'),sessionChecker.adminSessionChecker,getBanner.addBanner)
+router.delete('/deletebanner',sessionChecker.adminSessionChecker,getBanner.deleteBanner)
+
+
+// for coupon
+router.get('/coupon',sessionChecker.adminSessionChecker,getCoupon.showCoupon)
+router.post('/addcoupon',sessionChecker.adminSessionChecker,getCoupon.addCoupon)
+
 
 // for logout
 router.get('/logout',adminset.adminLogout)

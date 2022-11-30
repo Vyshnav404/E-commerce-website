@@ -31,7 +31,7 @@
         <div class="col-lg-3 col-6 text-right">
             <a href="/whislist" class="btn border">
                 <i class="fas fa-heart text-primary"></i>
-                <span class="badge badge-light" id="whishlist-count">0</span>
+                <span class="badge badge-light" id="whishlist-count"><%=whishlistCount%></span>
             </a>
             <a href="/cart" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
@@ -61,10 +61,10 @@
                     <a href="" class="nav-item nav-link">Sofa</a>
                     <a href="" class="nav-item nav-link">Bed</a>
                     <a href="" class="nav-item nav-link">Armchair</a>
-                    <a href="" class="nav-item nav-link">Dining Table</a>
+                    <!-- <a href="" class="nav-item nav-link">Dining Table</a>
                     <a href="" class="nav-item nav-link">cupboard</a>
                     <a href="" class="nav-item nav-link">Bench</a>
-                    <a href="" class="nav-item nav-link">Bookcase</a>
+                    <a href="" class="nav-item nav-link">Bookcase</a> -->
              
                 </div>
             </nav>
@@ -86,7 +86,7 @@
                         <!-- <a href="shop.html" class="nav-item nav-link">Shop</a> -->
                         <!-- <a href="detail.html" class="nav-item nav-link">Shop Detail</a> -->
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a> -->
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="cart.html" class="dropdown-item">Shopping Cart</a>
                                 <a href="checkout.html" class="dropdown-item">Checkout</a>
@@ -98,7 +98,7 @@
                     <% if(userData) { %>
 
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="" class="nav-item nav-link "><%= userData.Username%></a>
+                        <a href="/profile" class="nav-item nav-link "><%= userData.Username%></a>
                         <a href="/userlogout" class="nav-item nav-link">Logout</a>
                        
                         </div>

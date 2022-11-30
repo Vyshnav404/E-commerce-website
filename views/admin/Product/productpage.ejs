@@ -1,7 +1,7 @@
 
 <div class="container product">
     <a class="btn btn-primary  mb-4" href="/admin/addproduct" role="button">Add Product</a>
-<table class="table table-success table-striped">
+<table id="productsTable" class="table table-success table-striped" >
     <thead>
         <tr>
           <th scope="col">NO.</th>
@@ -28,7 +28,9 @@
   </table>
 </div>
 
+      
 <script>
+
   function Deleteproduct(productId){
    swal({
     title: "DELETE!",
@@ -52,4 +54,10 @@
    })
     
   }
+
+  $(document).ready(function () {
+    $('#productsTable').DataTable();
+});
+
 </script>
+

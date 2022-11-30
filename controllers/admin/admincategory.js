@@ -18,7 +18,7 @@ const addCategory =(req,res)=>{
       picture:req.file.filename,
       categoryName
      }).then((category)=>{
-        res.redirect('/admin/category')
+        res.redirect('/admin/category') 
      })
 }
 

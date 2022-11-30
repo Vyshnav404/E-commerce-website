@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="header " style="text-align: center;">
+       <h1 style="color:#D97E09C7 ;">EDIT PROFILE</h1>
+       <hr style="border: solid black ;">
+     <div>
+        <form action="/editprofile" method="post">
+       <div class="container col-md-6 mt-5">
+         
+           <div class="mb-3 "><input type="text" placeholder="UserName " id="name" name="Username"class="form-control " value="<%= userDetails.Username%>"></div>	
+          
+       <div class="mt-4">
+        <label for="exampleFormControlTextarea1" class="form-label"></label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="Address" rows="3" placeholder="Address" value="<%= userDetails.Address%>"></textarea>
+     </div>
+   </div>
+       <div class="mt-5">
+       
+      
+       <button type="submit" class="btn btn-primary me-3">SAVE</button>
+       </div>
+    </form>
+     </div>
+     </div>
+    </div>

@@ -32,7 +32,7 @@
             <%= Total %>
           </td>
           <td>
-            <button class="btn btn-danger">Delete</button>
+            <button onclick="DeleteFromcart('<%=products[i].item%>')" class="btn btn-sm btn-primary">X</button>
           </td>
          
 
@@ -42,10 +42,51 @@
       </tbody>
   </table>
   <hr>
-  <div class="float-right pr-5 mt-4">
+  <!-- <div class="float-right pr-5 mt-4">
   <h2 class="float-right mr-5">Total:Rs.<span id="totalP"><%= totalValue %></span></h2>
-  <a href="/place-order" class="float-right btn btn-success mt-3" style="width: 80%;">Place Order</a>
-  </div>
+  <a href="/place-order" class="float-right btn btn-sm btn-primary" mt-3" style="width: 80%;">Place Order</a>
+  </div> -->
+
+  <div class="col-lg-4 float-right">
+               
+    <div class="input-group">
+        <input type="text" class="form-control p-4" placeholder="Coupon Code" id="couponCode" name="couponCode">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary" onclick="applyCoupon()">Apply Coupon</button>
+        </div>
+        <span id="couponMessage"></span>
+    </div>
+
+<div class="card border-secondary mb-5">
+    <div class="card-header bg-secondary border-0">
+        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-3 pt-1">
+            <h6 class="font-weight-medium">Subtotal</h6>
+            <h6 class="font-weight-medium"> ₹<span id="totalP"><%=totalValue%></span></h6>
+        </div>
+        <div class="d-flex justify-content-between mb-3 pt-1">
+            <h6 class="font-weight-medium">discount</h6>
+            <h6 class="font-weight-medium" id="discountId">0%
+            </h6>
+        </div>
+        <div class="d-flex justify-content-between">
+            <h6 class="font-weight-medium">Shipping</h6>
+            <h6 class="font-weight-medium">5%
+            </h6>
+        </div>
+    </div>
+    <div class="card-footer border-secondary bg-transparent">
+        <div class="d-flex justify-content-between mt-2">
+            <h5  class="font-weight-bold">Total</h5>
+            <h5 class="font-weight-bold"  id="final_total">
+              ₹<span id="totalA"><%=totalValue%></span></h5>
+        </div>
+        <a href="/place-order" class="btn btn-block btn-primary my-3 py-3"  >Proceed To Checkout</a>
+    </div>
+</div>
+</div>
   
 </div>
 
@@ -80,6 +121,7 @@
         }else{
           document.getElementById(proId).innerHTML=quantity+count
           document.getElementById('totalP').innerHTML=response.total
+          document.getElementById('totalA').innerHTML=response.total
         
 
         }
@@ -89,5 +131,57 @@
      })
   }
 
+   
+function DeleteFromcart(proId){
+  swal({
+    title:"DELETE",
+    text:"Do you want to delete the item",
+    icon:'warning',
+    buttons:["Cancel","OK"]
+  }).then(val=>{
+    if(val){
+      fetch('/deletefromcart',{
+    method:'delete',
+    headers:{
+      'Content-Type':'application/JSON'
+    },
+    body:JSON.stringify({
+      proId
+    })
+  }).then(()=>{
+    window.location.reload()
+  })
+    }
+   
+  })
+  
+}
+
+function applyCoupon(){
+  let coupon = document.getElementById('couponCode').value.toUpperCase()
+  let message = document.getElementById('couponMessage');
+  let discountDisplay = document.getElementById('discountId');
+  let finalTotal = document.getElementById('final_total')
+  fetch('/applycoupon',{
+    method:'post',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      coupon
+    })
+  }).then(res =>res.json()).then(data=>{
+    if(data.couponStatus == true){
+      message.innerHTML == ''
+      discountDisplay.innerHTML = data.discount
+      finalTotal.innerHTML = data.discountedTotal 
+    }else{
+      message.innerHTML = 'COUPON NOT ACCEPTABLE'
+      discountDisplay.innerHTML = data.discount
+      finalTotal.innerHTML = data.discountedTotal   
+    }
+  })
+
+}
    
 </script>

@@ -10,18 +10,33 @@ const clickWhislist = async(req,res)=>{
     if(req.session.user){
         cartCount = await userCart.getCartCount(req.session.user._id)
       }
-    res.render('user/whishlist',{admin:false,user:true,cartCount,userData,products})
+
+    let whishlistCount = null
+    if(req.session.user){
+        whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+      }
+
+    res.render('user/whishlist',{admin:false,user:true,cartCount,userData,products,whishlistCount})
 }
 
  const addToWhishlist = (req,res)=>{
     let productid = req.body.id
-    console.log("jjjjjj",productid);
     userWhishlist.addWhishlist(productid,req.session.user._id).then(()=>{
         res.json({status:true})
     })
  }
 
+ const deleteFromWish =(req,res)=>{
+    let id = req.body.proId
+    userid = req.session.user._id
+    
+    userWhishlist.deleteOneProduct(userid,id).then((response)=>{
+        res.json(response)
+    })
+ }
+
 module.exports={
-    clickWhislist,
-    addToWhishlist
+    clickWhislist, 
+    addToWhishlist,
+    deleteFromWish
 }

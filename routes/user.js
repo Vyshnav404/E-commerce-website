@@ -7,6 +7,8 @@ const sessionChecker= require('../middleware/sessionmiddleware')
 const getCategory = require('../controllers/user/categorybase')
 const userProduct = require('../controllers/user/userProductview')
 const getWhislist = require('../controllers/user/whishlist')
+const getprofile = require('../controllers/user/profile')
+const getCoupon = require('../controllers/user/usercoupon')
 
 
 
@@ -27,10 +29,12 @@ router.get('/categorybase',getCategory.loadCategory)
 router.get('/cart',sessionChecker.userSessionChecker,getCart.clickCart)
 router.get('/add-to-cart/:id',getCart.addTocart)
 router.post('/change-product-quantity',getCart.changeProductQuantity)
+router.delete('/deletefromcart',sessionChecker.userSessionChecker,getCart.deleteFromCart)
 
 // for whislist setting
 router.get('/whislist',sessionChecker.userSessionChecker,getWhislist.clickWhislist)
 router.post('/addtowhishlist',sessionChecker.userSessionChecker,getWhislist.addToWhishlist)
+router.delete('/deletefromwishlist',sessionChecker.userSessionChecker,getWhislist.deleteFromWish)
   
 // for userProduct single view
 router.get('/viewProductDetailsPage',userProduct.showProductDetails)
@@ -42,6 +46,14 @@ router.get('/orderPlaced',sessionChecker.userSessionChecker,getCart.orderPlaced)
 router.get('/orderList',sessionChecker.userSessionChecker,getCart.orderList)
 router.get('/view-order-product',sessionChecker.userSessionChecker,getCart.viewOrderProducts)
 router.post('/verify-payment',sessionChecker.userSessionChecker,getCart.verifyPayment)
+
+// for profile
+router.get('/profile',sessionChecker.userSessionChecker,getprofile.showProfile)
+router.get('/edituprofile',sessionChecker.userSessionChecker,getprofile.editProfile)
+router.post('/editprofile',sessionChecker.userSessionChecker,getprofile.changeProfile)
+
+// for coupon
+router.post('/applycoupon',sessionChecker.userSessionChecker,getCoupon.applytheCoupon)
 
 // for userlogout
 router.get('/userlogout',getLogin.userLogout)

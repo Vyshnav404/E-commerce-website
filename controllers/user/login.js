@@ -5,6 +5,8 @@ const userProductView = require('../../model/userProduct');
 const categoryView = require('../../model/category')
 const { Product_Details } = require('../../config/collection');
 const viewCart = require('../../model/userCart')
+const userwhishlist = require('../../model/whishlistModel')
+const carousal = require('../../model/banner')
 
 
 // OTP setting
@@ -31,9 +33,17 @@ const firstClick = async (req,res)=>{
         cartCount = await viewCart.getCartCount(req.session.user._id)
       }
      
+      let whishlistCount = null
+      if(req.session.user){
+          whishlistCount = await userwhishlist.getWishListCount(req.session.user._id)
+        }
+
     userProductView.displayProduct().then((productDetails)=>{
     categoryView.showCategory().then((category)=>{
-        res.render('user/userhomepage',{admin:false,user:true,productDetails,category,userData,cartCount})
+      carousal.showBanner().then((banner)=>{
+        res.render('user/userhomepage',{admin:false,user:true,productDetails,category,userData,cartCount,whishlistCount,banner})
+      })
+       
     })
     })
    
@@ -57,7 +67,7 @@ const userSignUp = (req,res)=>{
 const userRegister =(req,res)=>{
 
     let verified = 0;
-
+    let state = 'active'
   const { Username, Email, Password } = req.body;
   let mailDetails = {
     from: "vyshnav404@gmail.com",
@@ -73,7 +83,7 @@ const userRegister =(req,res)=>{
     }
   });
 
-    userlog.doSignUp(req.body,verified).then((response)=>{
+    userlog.doSignUp(req.body,verified,state).then((response)=>{
       
         userId = response.insertedId
 
@@ -89,6 +99,11 @@ const otpverification = async (req,res) => {
     if(req.session.user){
         cartCount = await viewCart.getCartCount(req.session.user._id)
       }
+
+      let whishlistCount = null
+      if(req.session.user){
+          whishlistCount = await userwhishlist.getWishListCount(req.session.user._id)
+        }
     console.log("otp send is ",OTP);
     console.log("otp recieved is ",req.body.otp);
   
@@ -98,9 +113,12 @@ const otpverification = async (req,res) => {
         userlog.userVerified(userId).then((response)=>{
             userProductView.displayProduct().then((productDetails)=>{
                 categoryView.showCategory().then((category)=>{
+                  carousal.showBanner().then((banner)=>{
                     req.session.user = response.user
                     let userData = req.session.user
-                    res.render("user/userhomepage",{admin:false,user:true,productDetails,category,userData,cartCount});
+                    res.render("user/userhomepage",{admin:false,user:true,productDetails,category,userData,cartCount,banner,whishlistCount});
+                  })
+                   
                 })
             })
         })
@@ -141,7 +159,7 @@ module.exports={
     userLogin,
     userSignUp,
     userRegister,
-    loginAction,
+    loginAction, 
     otpverification,
     userLogout
 }
