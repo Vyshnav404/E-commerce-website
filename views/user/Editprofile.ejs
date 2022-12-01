@@ -10,8 +10,15 @@
           
        <div class="mt-4">
         <label for="exampleFormControlTextarea1" class="form-label"></label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" name="Address" rows="3" placeholder="Address" value="<%= userDetails.Address%>"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="Address" rows="3" placeholder="Address" ><%= userDetails.Address%>"</textarea>
      </div>
+
+     <div class="mt-4">													
+      <input type="number" class="form-control mb-3 "  required id="pin" placeholder="Pincode" name="Pincode" value="<%= userDetails.Pincode%>"></div>
+  
+      <div class="mt-4">													
+        <input type="number" class="form-control mb-3 "  required id="phone" placeholder="Mobile" name="Mobile" value="<%= userDetails.Mobile%>"></div>
+
    </div>
        <div class="mt-5">
        

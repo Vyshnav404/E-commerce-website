@@ -8,7 +8,7 @@ module.exports={
     
         return new Promise(async(resolve,reject)=>{
             let userData =  await db.get().collection(collection.User_Details).findOne({_id:ObjectId(userId)})
-            
+        
             resolve(userData)
         })
     },
@@ -21,7 +21,9 @@ module.exports={
             {
                 $set:{
                     Username:userDetails.Username,
-                    Address:userDetails.Address
+                    Address:userDetails.Address,
+                    Pincode:userDetails.Pincode,
+                    Mobile: userDetails.Mobile
                 }
             }
             )

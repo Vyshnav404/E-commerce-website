@@ -1,6 +1,7 @@
 const userCart = require('../../model/userCart')
 const userPay = require('../../model/payOrder')
 const userWhishlist=require('../../model/whishlistModel')
+const userProfile = require('../../model/profile')
 
 
 const clickCart = async(req,res)=>{
@@ -53,9 +54,10 @@ const placeOrder = async(req,res)=>{
     if(req.session.user){
         whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
       }
-      
+
+      let userDetails = await userProfile.showOneUser(userData._id)
       let total = await userCart.getTotalAmount(req.session.user._id)
-    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount})
+    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,userDetails})
 }
 
 

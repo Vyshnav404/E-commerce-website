@@ -17,6 +17,7 @@ const showProfile = async(req,res)=>{
       }
 
       getUser.showOneUser(userData._id).then((userDetails)=>{
+        
         res.render('user/myprofile',{admin:false,user:true,cartCount,whishlistCount,userDetails,userData})
       })
    
@@ -37,13 +38,14 @@ const editProfile = async(req,res)=>{
       }
 
       getUser.showOneUser(userData._id).then((userDetails)=>{
+        
         res.render('user/Editprofile',{admin:false,user:true,cartCount,userData,whishlistCount,userDetails})
       })
      
 }
 
 const changeProfile =async(req,res)=>{
-
+  console.log('edit====',req.body);
   let userData = req.session.user
   let cartCount= null
   if(req.session.user){
@@ -56,7 +58,9 @@ const changeProfile =async(req,res)=>{
     }
 
   await getUser.editOneProfile(req.body,userData._id).then(async()=>{
+  
    await getUser.showOneUser(userData._id).then((userDetails)=>{
+    
       res.render('user/myprofile',{admin:false,user:true,userData,cartCount,whishlistCount,userDetails})
     })
     
