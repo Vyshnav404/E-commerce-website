@@ -55,20 +55,31 @@ const placeOrder = async(req,res)=>{
         whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
       }
 
+        let finalTotal = Math.round(req.query.finalTotal)
+
       let userDetails = await userProfile.showOneUser(userData._id)
       let total = await userCart.getTotalAmount(req.session.user._id)
-    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,userDetails})
+    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,userDetails,finalTotal})
+}
+
+const showProceedToCheckoutPage = (req,res)=>{
+    let finalTotal = req.query.FINALTOTAL
+    res.json(finalTotal)
 }
 
 
+
+
 const placeOrderPay = async(req,res)=>{
+    let totalAmount = req.query.finalTotal
+    totalAmount = parseInt(totalAmount)
     let products = await userCart.cartProductList(req.body.userId)
     let totalPrice = await userCart.getTotalAmount(req.body.userId)
-    userCart.placeOrder(req.body,products,totalPrice).then((orderId)=>{
+    userCart.placeOrder(req.body,products,totalAmount).then((orderId)=>{
         if(req.body['payment-method']==='COD'){
             res.json({codSuccess:true})
         }else{
-            userPay.generateRazarpay(orderId,totalPrice).then((response)=>{
+            userPay.generateRazarpay(orderId,totalAmount).then((response)=>{
                 res.json(response)
             })
         }
@@ -160,5 +171,6 @@ module.exports= {
     orderList,
     viewOrderProducts,
     verifyPayment,
-    deleteFromCart
+    deleteFromCart,
+    showProceedToCheckoutPage
 }

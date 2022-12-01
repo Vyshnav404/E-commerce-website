@@ -80,10 +80,11 @@
     <div class="card-footer border-secondary bg-transparent">
         <div class="d-flex justify-content-between mt-2">
             <h5  class="font-weight-bold">Total</h5>
-            <h5 class="font-weight-bold"  id="final_total">
-              ₹<span id="totalA"><%=totalValue%></span></h5>
+            <h5 class="font-weight-bold"  >
+              ₹<span id="final_total"><%=totalValue%></span></h5>
         </div>
-        <a href="/place-order" class="btn btn-block btn-primary my-3 py-3"  >Proceed To Checkout</a>
+        <button class="btn btn-block btn-primary my-3 py-3" onclick="proceedToCheckout()">Proceed To Checkout</button>
+        <!-- <a href="/place-order" class="btn btn-block btn-primary my-3 py-3"  >Proceed To Checkout</a> -->
     </div>
 </div>
 </div>
@@ -92,6 +93,22 @@
 
 
 <script>
+
+
+function proceedToCheckout(){
+
+  let finalTotal = document.getElementById('final_total').innerHTML
+  fetch('/proceedToCheckout?FINALTOTAL='+finalTotal,
+  {
+    method:'get'
+  }
+  ).then(res=>res.json()).then((data)=>{
+    location.href="/place-order?finalTotal="+data
+  })
+}
+
+
+
   function changeQuantity(cartId,proId,userId,count){
     let quantity = parseInt(document.getElementById(proId).innerHTML)
     count =parseInt(count)
@@ -121,7 +138,7 @@
         }else{
           document.getElementById(proId).innerHTML=quantity+count
           document.getElementById('totalP').innerHTML=response.total
-          document.getElementById('totalA').innerHTML=response.total
+          document.getElementById('final_total').innerHTML=response.total
         
 
         }

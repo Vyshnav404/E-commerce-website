@@ -29,7 +29,7 @@
             <div class="col-md-5">
                 <br><br><br>
                 <div class="container mt-5  checkout ">
-                    <h5>Total Amount : RS.  <%= total %>
+                    <h5>Total Amount : RS. <span id="final_total"><%= finalTotal %></span> 
                     </h5>
                     <hr>
                     <div class="payment">
@@ -58,9 +58,11 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
   $("#checkout-form").submit((e)=>{
+    let finalTotal = document.getElementById('final_total').innerHTML
+
     e.preventDefault()
     $.ajax({
-        url:'/place-orderPay',
+        url:'/place-orderPay?finalTotal='+finalTotal,
         method:'post',
         data:$('#checkout-form').serialize(),
         success:(response)=>{

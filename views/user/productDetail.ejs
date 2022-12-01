@@ -1,4 +1,85 @@
+<style>
+    * {box-sizing: border-box;}
+    
+    .img-zoom-container {
+      position: relative;
+    }
+    
+    .img-zoom-lens {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      /*set the size of the lens:*/
+      width: 40px;
+      height: 40px;
+    }
+    
+    .img-zoom-result {
+      border: 1px solid #d4d4d4;
+      /*set the size of the result div:*/
+      width: 300px;
+      height: 300px;
+    }
+    </style>
+    <script>
+    function imageZoom(imgID, resultID) {
+      var img, lens, result, cx, cy;
+      img = document.getElementById(imgID);
+      result = document.getElementById(resultID);
+      /*create lens:*/
+      lens = document.createElement("DIV");
+      lens.setAttribute("class", "img-zoom-lens");
+      /*insert lens:*/
+      img.parentElement.insertBefore(lens, img);
+      /*calculate the ratio between result DIV and lens:*/
+      cx = result.offsetWidth / lens.offsetWidth;
+      cy = result.offsetHeight / lens.offsetHeight;
+      /*set background properties for the result DIV:*/
+      result.style.backgroundImage = "url('" + img.src + "')";
+      result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+      /*execute a function when someone moves the cursor over the image, or the lens:*/
+      lens.addEventListener("mousemove", moveLens);
+      img.addEventListener("mousemove", moveLens);
+      /*and also for touch screens:*/
+      lens.addEventListener("touchmove", moveLens);
+      img.addEventListener("touchmove", moveLens);
+      function moveLens(e) {
+        var pos, x, y;
+        /*prevent any other actions that may occur when moving over the image:*/
+        e.preventDefault();
+        /*get the cursor's x and y positions:*/
+        pos = getCursorPos(e);
+        /*calculate the position of the lens:*/
+        x = pos.x - (lens.offsetWidth / 2);
+        y = pos.y - (lens.offsetHeight / 2);
+        /*prevent the lens from being positioned outside the image:*/
+        if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+        if (x < 0) {x = 0;}
+        if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+        if (y < 0) {y = 0;}
+        /*set the position of the lens:*/
+        lens.style.left = x + "px";
+        lens.style.top = y + "px";
+        /*display what the lens "sees":*/
+        result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+      }
+      function getCursorPos(e) {
+        var a, x = 0, y = 0;
+        e = e || window.event;
+        /*get the x and y positions of the image:*/
+        a = img.getBoundingClientRect();
+        /*calculate the cursor's x and y coordinates, relative to the image:*/
+        x = e.pageX - a.left;
+        y = e.pageY - a.top;
+        /*consider any page scrolling:*/
+        x = x - window.pageXOffset;
+        y = y - window.pageYOffset;
+        return {x : x, y : y};
+      }
+    }
+    </script>
+
 <!-- Topbar Start -->
+
 <div class="container-fluid">
     <!-- <div class="row bg-secondary py-2 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
@@ -149,7 +230,11 @@
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner border">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="/images/<%=product.picture %>" alt="Image">
+                        <div class="img-zoom-container">
+                            <img id="myimage" class="w-100 h-100" src="/images/<%=product.picture %>" alt="Image">
+                            <div id="myresult" class="img-zoom-result"></div>
+                        </div>
+                        
                     </div>
                     <!-- <div class="carousel-item">
                         <img class="w-100 h-100" src="img/product-2.jpg" alt="Image">
@@ -552,7 +637,7 @@
 
 <script>
     function addToWishList(proId){
-        alert("come on",proId)
+        
         $.ajax({
             url:'/addtowhishlist',
             method:'post',
@@ -564,14 +649,28 @@
                     let count = $('whishlist-count').html()
                     count = parseInt(count)+1
                     $('#whishlist-count').html(count)
-                    alert('product added to wishlist')
+                    swal({
+  title: "Good job!",
+  text: "You added to whishlist!",
+  icon: "success",
+});
                 }else{
-                    alert(response)
+                    swal({
+  title: "Try Again!",
+  text: "Not added to whishlist!",
+  icon: "danger",
+});
                 }
             }
         })
     }
 </script>
+
+<!-- for image zooming -->
+<script>
+    // Initiate zoom effect:
+    imageZoom("myimage", "myresult");
+    </script>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

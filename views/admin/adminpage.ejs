@@ -32,9 +32,15 @@
         </div>
       </div>
 
+      <div style="width:40%;margin-top:5%;margin-left:30%;">
+        <canvas style="width:100%; " id="myChart"></canvas>
+      </div>
      
     </div>
+   
   </section> 
+
+
 
   <script>
    let sidebar = document.querySelector(".sidebar");
@@ -48,6 +54,30 @@ sidebarBtn.onclick = function() {
 }
  </script>
 
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['user', 'Placed', 'Shipped', 'Delivered'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 </body>
+
 </html>
 

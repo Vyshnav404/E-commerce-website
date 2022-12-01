@@ -51,7 +51,7 @@ module.exports={
                 response.discountedTotal = discountedTotal
                 response.couponStatus = true
                 response.discount = discount
-                console.log("come on",response);
+                
                 resolve(response)
                }else{
                 response.couponStatus = false

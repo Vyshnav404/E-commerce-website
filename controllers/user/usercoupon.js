@@ -9,8 +9,7 @@ const applytheCoupon = async(req,res)=>{
    let total = await getCart.getTotalAmount(userData._id)
 
    await getCoupon.applyCoupon(couponDetails,total).then((response)=>{
-    console.log("===============================>",response
-    );
+    
     res.json(response)
    })
   

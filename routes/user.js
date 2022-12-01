@@ -40,6 +40,7 @@ router.delete('/deletefromwishlist',sessionChecker.userSessionChecker,getWhislis
 router.get('/viewProductDetailsPage',userProduct.showProductDetails)
 
 // for place order
+router.get('/proceedToCheckout',sessionChecker.userSessionChecker,getCart.showProceedToCheckoutPage)
 router.get('/place-order',sessionChecker.userSessionChecker,getCart.placeOrder)
 router.post('/place-orderPay',sessionChecker.userSessionChecker,getCart.placeOrderPay)
 router.get('/orderPlaced',sessionChecker.userSessionChecker,getCart.orderPlaced)

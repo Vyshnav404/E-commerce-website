@@ -8,6 +8,7 @@ const getBrand = require('../controllers/admin/admbrand')
 const getUser = require('../controllers/admin/adminusermodel')
 const getBanner = require('../controllers/admin/admbanner')
 const getCoupon = require('../controllers/admin/admcoupon')
+const getOrder = require('../controllers/admin/admOrderlist')
 const multer = require('multer')
 const methodOverride = require('method-override')
 
@@ -85,6 +86,9 @@ router.delete('/deletebanner',sessionChecker.adminSessionChecker,getBanner.delet
 // for coupon
 router.get('/coupon',sessionChecker.adminSessionChecker,getCoupon.showCoupon)
 router.post('/addcoupon',sessionChecker.adminSessionChecker,getCoupon.addCoupon)
+
+// for orderlist
+router.get('/orderList',sessionChecker.adminSessionChecker,getOrder.showOrderPage)
 
 
 // for logout
