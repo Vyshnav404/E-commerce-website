@@ -52,6 +52,8 @@ router.post('/verify-payment',sessionChecker.userSessionChecker,getCart.verifyPa
 router.get('/profile',sessionChecker.userSessionChecker,getprofile.showProfile)
 router.get('/edituprofile',sessionChecker.userSessionChecker,getprofile.editProfile)
 router.post('/editprofile',sessionChecker.userSessionChecker,getprofile.changeProfile)
+router.get('/addAddress',sessionChecker.userSessionChecker,getprofile.addAddress)
+router.post('/add-address',sessionChecker.userSessionChecker,getprofile.addressAdd)
 
 // for coupon
 router.post('/applycoupon',sessionChecker.userSessionChecker,getCoupon.applytheCoupon)

@@ -1,6 +1,7 @@
 const userCart = require('../../model/userCart')
 const userWhishlist = require('../../model/whishlistModel')
-const getUser = require('../../model/profile')
+const getUser = require('../../model/profile');
+const router = require('../../routes/user');
 
 const showProfile = async(req,res)=>{
   let home = false;
@@ -71,8 +72,36 @@ const changeProfile =async(req,res)=>{
     
 }
 
+const addAddress= async(req,res)=>{
+  
+  let home= false;
+  let userData = req.session.user
+ 
+
+    let cartCount= null
+    if(req.session.user){
+        cartCount = await userCart.getCartCount(req.session.user._id)
+      }
+
+    let whishlistCount = null
+    if(req.session.user){
+        whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
+      }
+
+      res.render('user/addAddress',{admin:false,user:true,whishlistCount,cartCount,userData,home})
+}
+
+const addressAdd =(req,res)=>{
+  let userData = req.session.user._id
+
+   getUser.addAddress(userData,req.body)
+   res.redirect('/addAddress')
+}
+
 module.exports={
     showProfile,
     editProfile,
-    changeProfile
+    changeProfile,
+    addAddress,
+    addressAdd
 }
