@@ -3,6 +3,7 @@ const userWhishlist = require('../../model/whishlistModel')
 const getUser = require('../../model/profile')
 
 const showProfile = async(req,res)=>{
+  let home = false;
     let userData = req.session.user
     
 
@@ -18,12 +19,13 @@ const showProfile = async(req,res)=>{
 
       getUser.showOneUser(userData._id).then((userDetails)=>{
         
-        res.render('user/myprofile',{admin:false,user:true,cartCount,whishlistCount,userDetails,userData})
+        res.render('user/myprofile',{admin:false,user:true,cartCount,whishlistCount,userDetails,userData,home})
       })
    
 }
 
 const editProfile = async(req,res)=>{
+  let home= false;
   let userData = req.session.user
  
 
@@ -39,7 +41,7 @@ const editProfile = async(req,res)=>{
 
       getUser.showOneUser(userData._id).then((userDetails)=>{
         
-        res.render('user/Editprofile',{admin:false,user:true,cartCount,userData,whishlistCount,userDetails})
+        res.render('user/Editprofile',{admin:false,user:true,cartCount,userData,whishlistCount,userDetails,home})
       })
      
 }

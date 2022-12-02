@@ -3,6 +3,7 @@ const userWhishlist = require('../../model/whishlistModel')
 
 
 const clickWhislist = async(req,res)=>{
+    let home=false;
     let userData = req.session.user
     let products = await userWhishlist.getWishListProducts(req.session.user._id)
     
@@ -16,7 +17,7 @@ const clickWhislist = async(req,res)=>{
         whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
       }
 
-    res.render('user/whishlist',{admin:false,user:true,cartCount,userData,products,whishlistCount})
+    res.render('user/whishlist',{admin:false,user:true,cartCount,userData,products,whishlistCount,home})
 }
 
  const addToWhishlist = (req,res)=>{

@@ -1,6 +1,6 @@
 const db = require('../config/connection')
 const collection = require('../config/collection')
-
+const { ObjectId } = require('mongodb')
 
 module.exports={
     showOrder:()=>{
@@ -8,5 +8,37 @@ module.exports={
             let orderList = db.get().collection(collection.Order_List).find().toArray()
             resolve(orderList)
          })
+    },
+
+    orderProducts:(orderId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let oneProduct = await db.get().collection(collection.Order_List).aggregate([
+                {
+                    $match:{_id:ObjectId(orderId)}
+                },
+                {
+                    $unwind:'$products'
+                },
+                {
+                    $lookup:{
+                        from:collection.Product_Details,
+                        localField:'products.item',
+                        foreignField:'_id',
+                        as:'orderproducts'
+                    }
+                },
+                {
+                    $project:{
+                        orderproducts:1
+                    }
+                }
+            ]).toArray()
+            
+            resolve(oneProduct)
+            
+            
+        })
     }
+
+
 }

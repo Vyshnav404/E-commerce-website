@@ -89,6 +89,7 @@ router.post('/addcoupon',sessionChecker.adminSessionChecker,getCoupon.addCoupon)
 
 // for orderlist
 router.get('/orderList',sessionChecker.adminSessionChecker,getOrder.showOrderPage)
+router.get('/adminviewOrderProducts',sessionChecker.adminSessionChecker,getOrder.orderDetails)
 
 
 // for logout

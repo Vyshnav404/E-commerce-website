@@ -10,6 +10,15 @@ const showOrderPage = (req,res)=>{
     
 }
 
+const orderDetails = (req,res)=>{
+    let orderId = req.query.id
+     getOrder.orderProducts(orderId).then((products)=>{
+        res.render('admin/viewFromOrderList',{admin:true,user:false,title:'Order Details',products})
+    })
+ 
+}
+
 module.exports={
-    showOrderPage
+    showOrderPage,
+    orderDetails
 }

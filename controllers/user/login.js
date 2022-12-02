@@ -26,6 +26,7 @@ let mailTransporter = nodemailer.createTransport({
 
 const firstClick = async (req,res)=>{
   let userData=req.session.user
+  let home=true;
 
     let cartCount=null
 
@@ -41,7 +42,7 @@ const firstClick = async (req,res)=>{
     userProductView.displayProduct().then((productDetails)=>{
     categoryView.showCategory().then((category)=>{
       carousal.showBanner().then((banner)=>{
-        res.render('user/userhomepage',{admin:false,user:true,productDetails,category,userData,cartCount,whishlistCount,banner})
+        res.render('user/userhomepage',{admin:false,user:true,productDetails,category,userData,cartCount,whishlistCount,banner,home})
       })
        
     })

@@ -5,6 +5,7 @@ const userProfile = require('../../model/profile')
 
 
 const clickCart = async(req,res)=>{
+    let home=false;
     let userData = req.session.user
     let products = await userCart.getCartProducts(req.session.user._id)
     let totalValue =0
@@ -22,7 +23,7 @@ const clickCart = async(req,res)=>{
         }
      
      
-    res.render('user/userCart',{admin:false,user:true,userData,products,cartCount,totalValue,whishlistCount})
+    res.render('user/userCart',{admin:false,user:true,userData,products,cartCount,totalValue,whishlistCount,home})
 }
 
 const addTocart = (req,res)=>{
@@ -45,6 +46,7 @@ const changeProductQuantity =(req,res)=>{
 
 
 const placeOrder = async(req,res)=>{
+    let home =false;
     let userData = req.session.user
     let cartCount= null
     if(req.session.user){
@@ -53,13 +55,13 @@ const placeOrder = async(req,res)=>{
       let whishlistCount = null
     if(req.session.user){
         whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
-      }
+      }home
 
         let finalTotal = Math.round(req.query.finalTotal)
 
       let userDetails = await userProfile.showOneUser(userData._id)
       let total = await userCart.getTotalAmount(req.session.user._id)
-    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,userDetails,finalTotal})
+    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,userDetails,finalTotal,home})
 }
 
 const showProceedToCheckoutPage = (req,res)=>{
@@ -90,7 +92,7 @@ const placeOrderPay = async(req,res)=>{
 }
 
 const orderPlaced = async(req,res)=>{
-
+    let home = false;
     let userData = req.session.user
     let cartCount= null
     if(req.session.user){
@@ -101,11 +103,12 @@ const orderPlaced = async(req,res)=>{
       if(req.session.user){
           whishlistCount = await userWhishlist.getWishListCount(req.session.user._id)
         }
-    res.render('user/orderplaced',{admin:false,user:true,userData,cartCount,whishlistCount})
+    res.render('user/orderplaced',{admin:false,user:true,userData,cartCount,whishlistCount,home})
 }
 
 
 const orderList = async(req,res)=>{
+    let home = false;
     let userData = req.session.user
     let cartCount= null
     if(req.session.user){
@@ -118,11 +121,12 @@ const orderList = async(req,res)=>{
       
     let totalValue = await userCart.getTotalAmount(req.session.user._id)
     let orders = await userCart.getUserOrders(req.session.user._id)
-    res.render('user/vieworder',{userData,admin:false,user:true,totalValue,orders,cartCount,whishlistCount})
+    res.render('user/vieworder',{userData,admin:false,user:true,totalValue,orders,cartCount,whishlistCount,home})
 }
 
 
 const viewOrderProducts = async(req,res)=>{
+    let home = false;
     let userData = req.session.user
     let cartCount= null
     if(req.session.user){
@@ -137,7 +141,7 @@ const viewOrderProducts = async(req,res)=>{
     let products = await userCart.getOrderProducts(req.query)
     let oneProduct = await userCart.getOneProduct(req.query.id)
     console.log("haaaa",oneProduct);
-    res.render('user/viewOrderProducts',{admin:false,user:true,cartCount,userData,products,oneProduct,whishlistCount})
+    res.render('user/viewOrderProducts',{admin:false,user:true,cartCount,userData,products,oneProduct,whishlistCount,home})
 
 }
 
