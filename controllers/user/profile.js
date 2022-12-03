@@ -26,7 +26,7 @@ const showProfile = async(req,res)=>{
 }
 
 const editProfile = async(req,res)=>{
-  let home= false;
+  let home = false;
   let userData = req.session.user
  
 
@@ -48,6 +48,7 @@ const editProfile = async(req,res)=>{
 }
 
 const changeProfile =async(req,res)=>{
+  let home = false;
   console.log('edit====',req.body);
   let userData = req.session.user
   let cartCount= null
@@ -64,7 +65,7 @@ const changeProfile =async(req,res)=>{
   
    await getUser.showOneUser(userData._id).then((userDetails)=>{
     
-      res.render('user/myprofile',{admin:false,user:true,userData,cartCount,whishlistCount,userDetails})
+      res.render('user/myprofile',{admin:false,user:true,userData,cartCount,whishlistCount,userDetails,home})
     })
     
   })

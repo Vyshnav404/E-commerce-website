@@ -13,12 +13,23 @@ const showOrderPage = (req,res)=>{
 const orderDetails = (req,res)=>{
     let orderId = req.query.id
      getOrder.orderProducts(orderId).then((products)=>{
-        res.render('admin/viewFromOrderList',{admin:true,user:false,title:'Order Details',products})
+        res.render('admin/viewFromOrderList',{admin:true,user:false,title:'Order Details',products,orderId})
     })
  
 }
 
+const statusUpdate = (req,res)=>{
+    console.log("vijjjj",req.body.orderId);
+    console.log('ooooooo',req.body.status);
+    let status = req.body.status;
+    let orderId = req.body.orderId;
+
+    getOrder.orderStatusUpdate(orderId,status)
+
+}
+
 module.exports={
     showOrderPage,
-    orderDetails
+    orderDetails,
+    statusUpdate
 }

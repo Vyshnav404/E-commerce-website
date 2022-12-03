@@ -58,6 +58,9 @@ router.post('/add-address',sessionChecker.userSessionChecker,getprofile.addressA
 // for coupon
 router.post('/applycoupon',sessionChecker.userSessionChecker,getCoupon.applytheCoupon)
 
+// for notfound
+
+
 // for userlogout
 router.get('/userlogout',getLogin.userLogout)
 

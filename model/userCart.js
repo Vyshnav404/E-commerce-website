@@ -179,15 +179,17 @@ module.exports={
             },
 
     placeOrder:(order,products,total)=>{
+        console.log("mmmmm",order);
             return new Promise((resolve,reject)=>{
         
                 let status =order['payment-method']==='COD'?'placed':'pending'
                 let orderObj ={
                     deliveryDetails:{
-                        name:order.name,
-                        mobile:order.mobile,
-                        address:order.address,
-                        pincode:order.pincode
+                        
+                        // name:order.name,
+                        // mobile:order.mobile,
+                        address:order.option1,
+                        // pincode:order.pincode
                     },
                     userId:ObjectId(order.userId),
                     paymentMethod:order['payment-method'],

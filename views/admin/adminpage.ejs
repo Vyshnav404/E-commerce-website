@@ -61,10 +61,10 @@ sidebarBtn.onclick = function() {
   new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['user', 'Placed', 'Shipped', 'Delivered'],
+      labels: ['user', 'Placed', 'Shipped', 'Delivered','Cancelled'],
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5],
+        label: '# of counts',
+        data: [ '<%= user%>', '<%= placed%>', '<%= shipped%>', '<%= delivered%>','<%= cancelled%>'],
         borderWidth: 1
       }]
     },

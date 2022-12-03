@@ -43,7 +43,7 @@ module.exports={
 
         return new Promise(async(resolve,reject)=>{
         let addressinfo = await db.get().collection(collection.User_Address).findOne({user:ObjectId(userId)})
-        console.log("jjjj",addressinfo);
+        
         if(addressinfo){
             db.get().collection(collection.User_Address).updateOne({user:ObjectId(userId)},
                 {
@@ -71,6 +71,13 @@ module.exports={
         
          
         })
-    } 
+    } ,
+    
+    showAddress:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let addressData = await db.get().collection(collection.User_Address).findOne({user:ObjectId(userId)})
+            resolve(addressData)
+        })
+    }
 }
  

@@ -91,6 +91,8 @@ router.post('/addcoupon',sessionChecker.adminSessionChecker,getCoupon.addCoupon)
 router.get('/orderList',sessionChecker.adminSessionChecker,getOrder.showOrderPage)
 router.get('/adminviewOrderProducts',sessionChecker.adminSessionChecker,getOrder.orderDetails)
 
+// for status update
+router.post('/orderupdate',sessionChecker.adminSessionChecker,getOrder.statusUpdate)
 
 // for logout
 router.get('/logout',adminset.adminLogout)

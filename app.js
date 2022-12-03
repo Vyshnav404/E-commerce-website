@@ -46,6 +46,10 @@ db.connect((err)=>{
 app.use('/',userRouter)
 app.use('/admin',adminRouter);
 
+app.use('*',(req,res)=>{
+    res.render('user/notfound',{admin:false,user:false})
+})
+
 app.listen(port,()=>{
     console.log("server started");
 })

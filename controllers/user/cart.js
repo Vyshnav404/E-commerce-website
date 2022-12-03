@@ -59,9 +59,16 @@ const placeOrder = async(req,res)=>{
 
         let finalTotal = Math.round(req.query.finalTotal)
 
-      let userDetails = await userProfile.showOneUser(userData._id)
-      let total = await userCart.getTotalAmount(req.session.user._id)
-    res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,userDetails,finalTotal,home})
+    //   let userDetails = await userProfile.showOneUser(userData._id)
+    let addressList = await userProfile.showAddress(userData._id)
+    let total = await userCart.getTotalAmount(req.session.user._id)
+    if(addressList== null){
+        res.redirect('/addAddress')
+    }else{
+        res.render('user/placeorder',{admin:false,user:true,cartCount,userData,total,whishlistCount,finalTotal,addressList,home})
+    }
+     
+   
 }
 
 const showProceedToCheckoutPage = (req,res)=>{
@@ -73,6 +80,7 @@ const showProceedToCheckoutPage = (req,res)=>{
 
 
 const placeOrderPay = async(req,res)=>{
+    console.log("zzzzz",req.body);
     let totalAmount = req.query.finalTotal
     totalAmount = parseInt(totalAmount)
     let products = await userCart.cartProductList(req.body.userId)
@@ -85,9 +93,9 @@ const placeOrderPay = async(req,res)=>{
                 res.json(response)
             })
         }
-
+ 
         
-        
+         
     })
 }
 

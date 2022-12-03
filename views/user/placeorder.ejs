@@ -12,19 +12,33 @@
                 
                 <form  id="checkout-form" style="    margin-bottom: 152px;" >
                     <div class="row" z>
-                        <div class="col-md-6">
-                            <div class="row"><h3>Enter delivery details</h3></div><br>
+                        <div class="col-md-6 col-lg-9">
+                            <div class="row"><h2 style="color: #D97E09C7;">Enter Delivery Details</h2></div><br>
                         </div>
-                        <div>
-                            <div class="mb-3 "><input type="text" placeholder="Enter your name " id="name" name="name"class="form-control " value="<%= userDetails.Username%>"></div>														
-                        <input type="text" class="form-control mb-3 "  required id="address" placeholder="Address" name="address" value="<%= userDetails.Address%>"></div>
-                        <div class="mb-3"><input type="text" class="form-control" required id="pincode" placeholder="Pincode" name="pincode" value="<%= userDetails.Pincode%>"></div>
-                        <div class="mb-3"><input type="text" class="form-control" id="mobile" placeholder="Mobile" required name="mobile" value="<%= userDetails.Mobile%>"></div>
+                       
+                        <div class="form-check my-2 mx-2 mt-5 ml-5">
+                            <% for (var i=0; i<addressList.address.length;i++) { %>
+                                <input type="radio" 
+                                value="<%= addressList.address[i].name %>, <%= addressList.address[i].mobile %>,<%= addressList.address[i].address %>
+                                <%= addressList.address[i].pincode %>" 
+                                class="form-check-input" id="check1" name="option1" value="something" >
+                                <label class="form-check-label" for="check1">
+                                    <div>
+                                        <%= addressList.address[i].name %> - <%= addressList.address[i].mobile %>
+                                    </div>
+                                    <div>
+                                        <%= addressList.address[i].address %> - <%= addressList.address[i].pincode %>
+                                    </div><br>
+                                    <% } %>
+                                </label>
+                        </div>
     
                         
                         
                         <input type="text" name="userId" style="display:none ;"   id=""   value="<%=userData._id %>">
                     </div>
+
+                    <div class="px-3 py-3 ml-5"><a href="/addAddress" class="btn btn-primary ">Add New Address</a></div> 
             </div>
             <div class="col-md-5">
                 <br><br><br>

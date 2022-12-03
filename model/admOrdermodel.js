@@ -38,6 +38,22 @@ module.exports={
             
             
         })
+    },
+
+    orderStatusUpdate:(orderId,status)=>{
+        
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.Order_List).updateOne({_id:ObjectId(orderId)},
+            {
+                $set:{
+                    status:status
+                }
+            }
+            ).then((response)=>{
+                console.log(response);
+                resolve()
+            })
+        })
     }
 
 

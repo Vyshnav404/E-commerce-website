@@ -31,7 +31,11 @@
 
 <script>
   function addToCarfromwish(proId){
-      console.log("passing id",proId);
+    swal({
+  title: "Good job!",
+  text: "Item Added To Cart!",
+  icon: "success",
+});
 $.ajax({
 
   url:'/add-to-cart/'+proId,

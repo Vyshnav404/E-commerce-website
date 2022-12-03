@@ -4,6 +4,7 @@ const userCart = require('../../model/userCart')
 const userWhishlist = require('../../model/whishlistModel')
 
 const loadCategory =async(req,res)=>{
+    let home = false;
     let catname = req.query.catname
     
     let userData = req.session.user
@@ -18,7 +19,7 @@ const loadCategory =async(req,res)=>{
     uProduct.viewCatBase(catname).then((catProducts)=>{
         
         
-        res.render("user/categorybase",{admin:false,user:true,userData,catProducts,cartCount,whishlistCount})
+        res.render("user/categorybase",{admin:false,user:true,userData,catProducts,cartCount,whishlistCount,home})
     })
    
 }

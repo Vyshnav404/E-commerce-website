@@ -18,10 +18,10 @@
         <% for(i=0;i<orders.length;i++) { %>
       <tr>
         <td><%let V=orders[i].date.toLocaleString()%><%=V%></td>
-        <td><%= orders[i].deliveryDetails.name %>,<br>
+        <td>
           <%= orders[i].deliveryDetails.address %>,<br>
-        <%= orders[i].deliveryDetails.pincode %>,<br>
-        <%= orders[i].deliveryDetails.mobile %></td>
+        <br>
+        </td>
         <td><%= orders[i].totalAmount %></td>
         <td><%= orders[i].paymentMethod %></td>
         <td><%= orders[i].status %></td>
