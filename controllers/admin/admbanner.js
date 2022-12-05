@@ -12,7 +12,7 @@ const addBanner = (req,res)=>{
     
     
     loadBanner.addToBanner({
-        picture:req.file.filename
+        picture:req.file.path
     }).then((banner)=>{
         res.redirect('/admin/banner')
     })

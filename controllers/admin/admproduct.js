@@ -19,6 +19,7 @@ const addProductPage = (req,res)=>{
 }
 
 const addProduct = (req,res)=>{
+    console.log("lolololol",req.file);
     let {
         productName,
         actualPrice,
@@ -36,7 +37,7 @@ const addProduct = (req,res)=>{
     quantityName = parseInt(quantityName)
         
     viewProduct.addProduct({
-        picture:req.file.filename,
+        picture:req.file.path,
         productName,
         actualPrice,
         sellingPrice,
@@ -75,7 +76,7 @@ const editProduct = (async(req,res)=>{
 const addEditproduct = (req,res)=>{
     console.log(req.params.id);
     console.log(req.file.filename);
-    viewProduct.editInProduct(req.params.id,req.body,req.file.filename).then((response)=>{
+    viewProduct.editInProduct(req.params.id,req.body,req.file.path).then((response)=>{
         res.redirect('/admin/product')
     })
 }

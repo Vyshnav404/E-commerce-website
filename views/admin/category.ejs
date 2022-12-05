@@ -66,7 +66,7 @@
             <tr>
                 <th scope="row"><%= i+1 %></th>
                 <td><%= category[i].categoryName %></td>
-                <td><img src="/images/<%= category[i].picture %>" style="width:4em; height:4em;"></td>
+                <td><img src="<%= category[i].picture %>" style="width:4em; height:4em;"></td>
                 <td><a href="" class="btn btn-warning">EDIT</a></td>
                 <td><a onclick="Deletecategory('<%=category[i]._id%>')" class="btn btn-danger">DELETE</a></td>
               </tr>

@@ -19,7 +19,7 @@
             <% for (var i=0;i<products.length;i++) { %> 
             <tr>
               <th scope="row"><%= i+1 %></th>
-              <td><img src="/images/<%= products[i].orderproducts[0].picture %>" alt="" style="width: 4em; height: 4em;"></td>
+              <td><img src="<%= products[i].orderproducts[0].picture %>" alt="" style="width: 4em; height: 4em;"></td>
               <td><%= products[i].orderproducts[0].productName %></td>
               <td>₹<%= products[i].orderproducts[0].sellingPrice %></td>
             </tr>

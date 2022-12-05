@@ -30,7 +30,7 @@
           <% for(i=0;i<products.length;i++) {%>
           <th scope="row"><%=i+1 %></th>
           <td><%=products[i].product.productName %></td>
-          <td><img src="/images/<%=products[i].product.picture %>" style="width: 4em; height:4em;"></td>
+          <td><img src="<%=products[i].product.picture %>" style="width: 4em; height:4em;"></td>
           <td>Rs:<%=products[i].product.sellingPrice %></td>
 
           

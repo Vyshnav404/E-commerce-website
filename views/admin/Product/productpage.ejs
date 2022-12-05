@@ -19,7 +19,7 @@
           <td><%=product[i].productName%></td>
           <td><%=product[i].quantityName%></td>
           <td><%=product[i].sellingPrice%></td>
-          <td><img src="/images/<%=product[i].picture %>" style="width: 4em; height:4em;" alt=""></td>
+          <td><img src="<%=product[i].picture %>" style="width: 4em; height:4em;" alt=""></td>
           <td><a href="/admin/editproduct?id=<%= product[i]._id%>" class="btn btn-warning">Edit</a>
           <a onclick="Deleteproduct('<%=product[i]._id%>')" class="btn btn-danger">Delete</a></td>
         </tr>

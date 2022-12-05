@@ -70,7 +70,7 @@
                     <div class="carousel-inner">
                         <% for(var i=0;i<banner.length;i++) { %> 
                       <div class="carousel-item active" data-bs-interval="10000" style="height:410px;width:100%;">
-                        <img src="/images/<%= banner[i].picture %>" class="d-block w-100" alt="..." style="object-fit:cover;height:100%;width:100%;">
+                        <img src="<%= banner[i].picture %>" class="d-block w-100" alt="..." style="object-fit:cover;height:100%;width:100%;">
                       </div>
                      <% } %>
                     </div>
@@ -139,7 +139,7 @@
                     <a href="/categorybase/?catname=<%= category[i].categoryName%>" class="cat-img position-relative overflow-hidden mb-3">
                     
                         
-                        <img class="img-fluid" src="/images/<%=category[i].picture %> " style="width: 20rem; height:20rem;" alt="">
+                        <img class="img-fluid" src="<%=category[i].picture %> " style="width: 20rem; height:20rem;" alt="">
                         
                 
                     </a>
@@ -200,7 +200,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="/images/<%=productDetails[i].picture %>" style="width: 20rem;height:20rem;" alt="image not found">
+                        <img class="img-fluid w-100" src="<%=productDetails[i].picture %>" style="width: 20rem;height:20rem;" alt="image not found">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3"><%= productDetails[i].productName %></h6>
@@ -265,7 +265,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="/images/<%= productDetails[i].picture %>" style="width: 20rem; height:20rem;" alt="image not found">
+                        <img class="img-fluid w-100" src="<%= productDetails[i].picture %>" style="width: 20rem; height:20rem;" alt="image not found">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3"><%= productDetails[i].productName %></h6>
