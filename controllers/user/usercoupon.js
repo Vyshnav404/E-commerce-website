@@ -8,10 +8,17 @@ const applytheCoupon = async(req,res)=>{
    let couponDetails = await getCoupon.checkCoupon(data)
    let total = await getCart.getTotalAmount(userData._id)
 
-   await getCoupon.applyCoupon(couponDetails,total).then((response)=>{
+   if(couponDetails && total>=5000 && total<=200000){
+
+    await getCoupon.applyCoupon(couponDetails,total).then((response)=>{
     
-    res.json(response)
-   })
+        res.json(response)
+       })
+   }else{
+    // res.json(response)
+   }
+
+  
   
 }
 

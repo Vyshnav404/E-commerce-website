@@ -217,7 +217,7 @@ module.exports={
     getUserOrders :(userId)=>{
         return new Promise(async(resolve,reject)=>{
             let orders = await db.get().collection(collection.Order_List).
-            find({userId:ObjectId(userId)}).toArray()
+            find({userId:ObjectId(userId)}).sort({date:-1}).toArray()
             resolve(orders)
         })
     },

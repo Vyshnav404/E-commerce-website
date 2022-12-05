@@ -5,7 +5,7 @@ const { ObjectId } = require('mongodb')
 module.exports={
     showOrder:()=>{
         return new Promise((resolve,reject)=>{
-            let orderList = db.get().collection(collection.Order_List).find().toArray()
+            let orderList = db.get().collection(collection.Order_List).find().sort({date:-1}).toArray()
             resolve(orderList)
          })
     },
