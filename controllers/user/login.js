@@ -7,6 +7,7 @@ const { Product_Details } = require('../../config/collection');
 const viewCart = require('../../model/userCart')
 const userwhishlist = require('../../model/whishlistModel')
 const carousal = require('../../model/banner')
+require('dotenv').config()
 
 
 // OTP setting
@@ -14,8 +15,8 @@ const carousal = require('../../model/banner')
 let mailTransporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "vyshnav404@gmail.com",
-      pass: "cfurmqbfeuxzcwwz",
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
     },
   });
 
@@ -71,7 +72,7 @@ const userRegister =(req,res)=>{
     let state = 'active'
   const { Username, Email, Password } = req.body;
   let mailDetails = {
-    from: "vyshnav404@gmail.com",
+    from: process.env.EMAIL,
     to:Email,
     subject: "Eproject",
     html: `<p>YOUR OTP FOR REGISTERING IN woodQ IS ${OTP}</p>`,

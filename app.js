@@ -7,7 +7,8 @@ const app = express()
 const db = require('./config/connection')
 const session = require('express-session')
 const cookie = require('cookie-parser')
-const port = 5000;
+// const port = 5000;
+require('dotenv').config()
 
 
 app.use(expresslayout)
@@ -50,6 +51,6 @@ app.use('*',(req,res)=>{
     res.render('user/notfound',{admin:false,user:false})
 })
 
-app.listen(port,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("server started");
 })

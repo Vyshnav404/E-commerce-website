@@ -3,8 +3,8 @@ const collection = require('../config/collection')
 const Razorpay  = require('razorpay');
 const { ObjectId } = require('mongodb');
 var instance = new Razorpay({
-    key_id: 'rzp_test_9oT5CWpksAyeFQ',
-    key_secret: '1QskKE4EJ9StgzqIBe1bxtvW',
+    key_id: process.env.RAZORPAY_KEY_ID ,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
   });
 
 
@@ -41,7 +41,7 @@ module.exports={
             let {
                 createHmac
               } = require('node:crypto');
-              let hmac = createHmac('sha256', '1QskKE4EJ9StgzqIBe1bxtvW');
+              let hmac = createHmac('sha256', process.env.RAZORPAY_KEY_SECRET);
 
               hmac.update(details.payment.razorpay_order_id+'|'+details.payment.razorpay_payment_id);
               hmac=hmac.digest('hex')
