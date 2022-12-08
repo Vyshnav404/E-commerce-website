@@ -97,6 +97,8 @@ const userRegister =(req,res)=>{
 
 const otpverification = async (req,res) => {
 
+  let home =true;
+
   let cartCount= null
     if(req.session.user){
         cartCount = await viewCart.getCartCount(req.session.user._id)
@@ -118,7 +120,7 @@ const otpverification = async (req,res) => {
                   carousal.showBanner().then((banner)=>{
                     req.session.user = response.user
                     let userData = req.session.user
-                    res.render("user/userhomepage",{admin:false,user:true,productDetails,category,userData,cartCount,banner,whishlistCount});
+                    res.render("user/userhomepage",{admin:false,user:true,productDetails,category,userData,cartCount,banner,whishlistCount,home});
                   })
                    
                 })
