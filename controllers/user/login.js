@@ -79,7 +79,7 @@ const userRegister =(req,res)=>{
   };
   mailTransporter.sendMail(mailDetails, function (err, data) {
     if (err) {
-      console.log("Error Occurs");
+      console.log(err,"Error Occurs");
     } else {
       console.log("Email sent successfully");
     }

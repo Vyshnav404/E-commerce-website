@@ -13,10 +13,10 @@
 
 
 
-        <div class="col-lg-6 col-6 text-left">
+          <div class="col-lg-6 col-6 text-block ms-5"> 
             <form action="">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
+                    <input type="text" class="form-control " placeholder="Search for products">
                     <div class="input-group-append">
                         <span class="input-group-text bg-transparent text-primary">
                             <i class="fa fa-search"></i>
@@ -24,11 +24,11 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>  
 
           <!------search bar end------->
 
-        <div class="col-lg-3 col-6 text-right">
+        <!-- <div class="col-lg-3 col-6 text-right">
             <a href="/whislist" class="btn border">
                 <i class="fas fa-heart text-primary"></i>
                 <span class="badge badge-light" id="whishlist-count"><%=whishlistCount%></span>
@@ -37,7 +37,7 @@
                 <i class="fas fa-shopping-cart text-primary"></i>
                 <span class="badge text-bg-warning" id="cart-count"><%=cartCount%></span>
             </a>
-        </div>
+        </div> -->
     </div>
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 ms-5 me-5">
         <a href="" class="text-decoration-none d-block d-lg-none">
@@ -74,8 +74,21 @@
                 <a href="/signup" class="nav-item nav-link">Register</a>
             </div>
                 <% } %>
+
+              
+                    <a href="/whislist" class="btn border">
+                        <i class="fas fa-heart text-primary"></i>
+                        <span class="badge badge-light" id="whishlist-count"><%=whishlistCount%></span>
+                    </a>
+                    <a href="/cart" class="btn border">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <span class="badge text-bg-warning" id="cart-count"><%=cartCount%></span>
+                    </a>
+                
             
         </div>
+
+       
     </nav>
 </div>
 
@@ -173,3 +186,11 @@
             </nav> -->
             
             <!--mini navbar over-->
+
+            <style>
+                @media screen and (max-width: 912px) {
+.text-block {
+    display: none;
+  }
+}
+            </style>
