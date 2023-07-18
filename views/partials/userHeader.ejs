@@ -105,12 +105,18 @@
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                         
-                        <a href="" class="nav-item nav-link">Table</a>
+                        <!-- <a href="" class="nav-item nav-link">Table</a>
                         <a href="" class="nav-item nav-link">Chair</a>
                         <a href="" class="nav-item nav-link">Shelf</a>
                         <a href="" class="nav-item nav-link">Sofa</a>
                         <a href="" class="nav-item nav-link">Bed</a>
-                        <a href="" class="nav-item nav-link">Armchair</a>
+                        <a href="" class="nav-item nav-link">Armchair</a> -->
+
+                        <% for(var i=0;i<category.length;i++){ %>
+
+                            <a href="/categorybase/?catname=<%= category[i].categoryName%>">
+                            <h5 class="nav-item nav-link "><%= category[i].categoryName %></h5></a>
+                      <%  }  %>
                         
                  
                     </div>
