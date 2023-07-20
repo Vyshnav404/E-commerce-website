@@ -7,18 +7,18 @@ const state = {
 };
 
 module.exports.connect = function(done) {
-  const url = 'mongodb+srv://vyshnav404:cxpqwhpRjbDb8rBT@woodq-ecommerce.3mxv8uj.mongodb.net/Ecommerce';
+  const url = 'mongodb+srv://vyshnav404:cxpqwhpRjbDb8rBT@woodq-ecommerce.3mxv8uj.mongodb.net/Ecommerce?retryWrites=true&w=majority';
   const dbname = 'Ecommerce';
 
 
   try {
     
-    MongoClient.connect(url, (err, client) => {
+    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
       console.log("mongoe ===",err);
       if (err) {
         return done(err);
       }
-      state.db = client.db(dbname);
+      // state.db = client.db(dbname);
       done();
     });
   } catch (error) {
