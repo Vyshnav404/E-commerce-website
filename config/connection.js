@@ -7,7 +7,7 @@ const state = {
 };
 
 module.exports.connect = function(done) {
-  const url = 'mongodb+srv://vyshnav404:cxpqwhpRjbDb8rBT@woodq-ecommerce.3mxv8uj.mongodb.net/Ecommerce?retryWrites=true&w=majority';
+  const url = 'mongodb+srv://hrmanagement:hrmanagement@hrmanagement.pkak7gi.mongodb.net/HRManagement?retryWrites=true&w=majority';
   const dbname = 'Ecommerce';
 
 
