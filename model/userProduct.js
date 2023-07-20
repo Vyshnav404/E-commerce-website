@@ -6,7 +6,7 @@ const { ObjectId } = require('mongodb');
 module.exports = {
     displayProduct:()=>{
         return new Promise(async(resolve,reject)=>{
-            let productDetails = await db.get().collection(collection.Product_Details).find().toArray()
+            let productDetails = await db.get().collection(collection?.Product_Details).find().toArray()
             resolve(productDetails)
         })
     },
