@@ -13,7 +13,7 @@ module.exports.connect = function(done) {
 
   try {
     
-    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
+    MongoClient.connect(url, (err, client) => {
       console.log("mongoe ===",err);
       if (err) {
         return done(err);
